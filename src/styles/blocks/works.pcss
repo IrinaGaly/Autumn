@@ -1,0 +1,38 @@
+.works-preview {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 140px;
+}
+
+.works-title {
+  color: #333C49;
+  font-weight: bold;
+  font-size: 36px;
+  margin: 146px 0 83px 0;
+}
+
+.works-preview__pictures {
+  width: 70%;
+  position: relative;
+  margin-right: 128px;
+
+  &::before {
+    content: attr(data-slide);
+    position: absolute;
+    top: -1%;
+    line-height: 1;
+    font-size: 350px;
+    right: 0;
+    font-weight: 800;
+    color: #E6E6E6;
+    transform: translateX(66%);
+    z-index: -100;
+  }
+}
+
+.works-preview__info {
+  color: #333C49;
+  width: 45%;
+}
+

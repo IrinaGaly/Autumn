@@ -35,6 +35,7 @@
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "pcss-loader": "^1.0.0",
     "postcss-advanced-variables": "^3.0.0",
     "postcss-each": "^0.10.0",
     "postcss-easy-import": "^3.0.0",
@@ -45,6 +46,7 @@
     "postcss-rgb": "^1.0.0",
     "postcss-scss": "^2.0.0",
     "postcss-svgo": "^4.0.2",
+    "pug": "^3.0.0",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.0.0",
     "storybook-dark-mode": "^0.6.1",
@@ -55,6 +57,7 @@
     "vue-loader": "^15.6.4",
     "vue-template-compiler": "^2.6.7",
     "webpack": "^4.29.5",
+    "webpack-alias-config-plugin": "0.0.2",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.0"
   },
@@ -63,8 +66,8 @@
   ],
   "dependencies": {
     "normalize.css": "^8.0.1",
+    "pcss": "^1.0.0",
     "promptly": "^3.0.3",
-    "pug": "^3.0.0",
     "request": "^2.88.0",
     "signale": "^1.4.0",
     "vue": "^2.6.7",
