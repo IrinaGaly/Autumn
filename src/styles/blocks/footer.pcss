@@ -18,17 +18,20 @@
 }
 
 .footer__copyright {
-  width: 25%;
   display: flex;
   flex-direction: column;
   color: rgba(#fff, .1);
   justify-content: space-between;  
-  margin-right: 113px;
+  margin-right: 73px;
 }
 
-.footer__copyright-userinfo {
-  width: 62%;
-  padding-top: 9px;
+.footer__copyright-date {
+  margin-right: 56px;
+}
+
+.footer__copyright-col {
+  display: flex;
+  flex-direction: row;
 }
 
 .footer__copyrigth-name {
@@ -38,6 +41,10 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 34px;
+}
+
+.footer__soc {
+  margin-left: 13px;
 }
 
 .footer__copyright-date {
@@ -55,7 +62,7 @@
 }
 
 .footer__desc {
- margin: 0 15px 30px 0;
+ margin: 0 15px 40px 0;
  width: 71%;
 }
 
@@ -75,8 +82,12 @@
   margin-right: 21px;
 
   &:hover {
-    color: #FF9A00;
-    fill: #FF9A00;
+    &:before {
+      border: 1px solod #ff9a00;
+    }
+    .social__icons {
+      fill: #FF9A00;
+    }
   }
 }
 .socials__link-footer::before {
@@ -90,4 +101,8 @@
   top: -95%;
   left: -58%;
   margin-right: 21px; 
+
+  &:hover {
+    border: 1px solod #ff9a00;
+  }
 }
