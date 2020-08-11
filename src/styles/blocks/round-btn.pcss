@@ -9,9 +9,24 @@
   position: relative;
   border-radius: 50%;
   margin-right: 30px;
+  transition: .3s;
+
+  &:hover {
+    border: 1px solid #FF9A00;
+    transition: .3s;
+  }
+
   &:last-child {
     margin-right: 0;
   }
+
+    &:hover {
+      &:before {
+        background: svg-load('arrow-down.svg', fill=orange) center center / contain no-repeat;
+        transition: .3s;
+      }
+    }
+
   &:before {
     content: "";
     width: 14px;
@@ -22,14 +37,14 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); 
+    transition: .3s;
     }
+  }
 
-  &_prev {
+  .round-btn_prev {
     &:before {
       transform: translate(-50%, -50%) rotate(-180deg);
     }
+
   }
-  &:hover {
-    border: 1px solid #FF9A00;
-  }
-}
+    

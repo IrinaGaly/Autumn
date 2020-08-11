@@ -56,6 +56,10 @@
   font-size: 48px;
   white-space: nowrap;
   color: rgba(255, 255, 255, 0.3);
+
+  @include desktop {
+    margin-bottom: 24px;
+  }
 }
 .footer__content-inner {
   display: flex;
@@ -84,13 +88,16 @@
 .socials__link-footer {
   position: relative;
   margin-right: 21px;
+  transition: .3s;
 
   &:hover {
     &:before {
-      border: 1px solod #ff9a00;
+      border: 1px solid #ff9a00;
+      transition: .3s;
     }
-    .social__icons {
+    .socials__icon {
       fill: #FF9A00;
+      transition: .3s;
     }
   }
 }
@@ -105,8 +112,10 @@
   top: -95%;
   left: -58%;
   margin-right: 21px; 
+  transition: .3s;
 
   &:hover {
-    border: 1px solod #ff9a00;
+    border: 1px solid #ff9a00;
+    transition: .3s;
   }
 }
