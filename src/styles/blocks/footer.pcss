@@ -32,6 +32,10 @@
 .footer__copyright-col {
   display: flex;
   flex-direction: row;
+
+  @include desktop {
+    flex-direction: column;
+  }
 }
 
 .footer__copyrigth-name {

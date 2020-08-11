@@ -3,6 +3,10 @@
   flex-direction: column;
   width: 30%;
   margin-bottom: 93px;
+
+  @include desktop {
+    width: 50%;
+  }
 }
 
 .values__title-text {
@@ -16,5 +20,9 @@
   display: flex;
   justify-content: flex-end;
   padding-right: 10%;
+
+  @include desktop {
+      padding-right: 0;
+    }
 }
 
