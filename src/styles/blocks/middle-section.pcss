@@ -11,15 +11,30 @@
     position: absolute;
     bottom: -9%;
     left: 0;
-  }
-}
 
-@include desktop {
-  .values:before {
-    width: 490px;
-    height: 728px;
-    background-size: cover;
-    bottom: -9%;
-    left: -7%;
+    @include desktop {
+        width: 490px;
+        height: 728px;
+        background-size: cover;
+        bottom: -9%;
+        left: -7%;
+      }
+
+    @include tablets {
+      width: 486px;
+      height: 387px;
+      transform: rotate(-90deg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      bottom: 5.2%;
+      left: 15%;
+    }
+
+    @include phones {
+      width: 320px;
+      height: 235px;
+      bottom: 4%;
+      left: 4%;
+    }
   }
 }

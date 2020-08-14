@@ -8,6 +8,11 @@
 .footer__container {
   display: flex;
   justify-content: space-between;
+
+  @include phones {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .footer__nav {
@@ -45,6 +50,10 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 34px;
+
+  @include tablets {
+    margin-bottom: 19px;
+  }
 }
 
 .footer__soc {
@@ -60,11 +69,26 @@
   @include desktop {
     margin-bottom: 24px;
   }
+
+  @include tablets {
+    margin-bottom: 0;
+  }
 }
+
+.footer__copyright-desc {
+  color: rgba(255, 255, 255, 0.3);
+}
+
 .footer__content-inner {
   display: flex;
   flex-direction: row;
+
+  @include tablets {
+    display: flex;
+    flex-direction: column
+  }
 }
+
 .footer__nav-menu {
   margin-bottom: 48px;
 }
@@ -101,6 +125,11 @@
     }
   }
 }
+
+.footer__desc-wrap {
+  margin-bottom: 40px;
+}
+
 .socials__link-footer::before {
   content: "";
   display: block;

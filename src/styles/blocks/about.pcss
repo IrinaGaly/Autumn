@@ -1,21 +1,47 @@
 .about {
   height: 100vh;
+
+  @include tablets {
+    background: url("~images/bg/about.png") no-repeat;
+    background-size: cover;
+  }
 }
 
 .about__user-inner {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @include desktop {
+    justify-content: space-around;
+  }
+
+  @include tablets {
+    margin: 8px 0 120px 0;
+  }
+
+  @include phones {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .about__container {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @include tablets {
+    height: 100%;
+  }
 }
 
 .about__content {
   width: 49%;
+
+  @include phones {
+    width: 90%;
+  }
 }
 
 .about__desc {
@@ -23,6 +49,10 @@
   margin-bottom: 20px;
   color: rgba(255, 255, 255, 0.8);
   font-size: 16px;
+
+  @include phones {
+    margin-bottom: 5px;
+  }
 }
 
 .about__title {
@@ -32,15 +62,17 @@
   color: $text-color;
 }
 
-.user__data-content  {
-  font-size: 16px;
-}
+
 .about__text-info {
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 77px;
   font-weight: 600;
   font-size: 16px;
   line-height: 30px;
+
+  @include tablets {
+    margin-bottom: 36px;
+  }
 }
 
 .about__ps {

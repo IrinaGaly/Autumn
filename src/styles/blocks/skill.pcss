@@ -2,12 +2,42 @@
   position: relative;
   width: 166px;
   height: 166px;
+
+  @include phones {
+    width: 115px;
+    height: 115px;
+  }
 }
 .skills {
   padding-bottom: 5%;
+
+  @include tablets {
+    padding-bottom: 27%;
+  }
+
+  @include phones {
+    padding-bottom: 45%;
+  }
+
+  @include phones {
+    width: 73%;
+  }
+}
+
+.skills__item {
+  @include phones {
+    display: flex;
+    justify-content: center;
+  }
 }
 .skills-row__list {
   display: flex;
+
+  @include phones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 .skill__circle {
@@ -16,12 +46,20 @@
   &_layer_under {
     stroke: #444140;
     stroke-width: 5px;
-  }
 
+    @include phones {
+      stroke-width: 2px;
+    }
+  }
+    
   &_layer_above {
     stroke-width: 12px;
     stroke-dasharray: 251;
     stroke-dashoffset: 120;
+
+    @include phones {
+      stroke-width: 8px;
+    }
   }
 }
 
@@ -36,18 +74,37 @@
   padding: 14px;
 }
 
-.scills-row__title {
+.skills-row__title {
   font-weight: bold;
   font-size: 24px;
   margin-bottom: 40px;
   z-index: 300;
   position: relative;
+
+  @include tablets {
+    text-align: center;
+  }
 }
 
 .skills-row__item {
   margin-right: 54px;
+
+  @include tablets {
+    margin-right: 35px;
+  }
+
+  @include phones {
+    &:nth-child(even) {
+      margin-right: 0;
+    } 
+  }
 }
 
 .skills-row__list {
   margin-bottom: 55px;
+
+  @include phones {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }

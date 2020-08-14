@@ -1,5 +1,9 @@
 .about__user {
   width: 25%;
+
+  @include tablets {
+    width: auto;
+  }
 }
 .user__avatar-pic {
   height: 200px;
@@ -7,11 +11,37 @@
   border-radius: 50%;
   margin-bottom: 78px;
 }
+
+.user__avatar-style {
+  display: flex;
+  justify-content: center;
+}
 .user__data {
   width: 100%;
+
+  @include phones {
+    margin-bottom: 45px;
+  }
 }    
+
+.user__data-content  {
+  font-size: 16px;
+}
 
 .user__data-title {
   color: rgba(255, 255, 255, 0.3);
   font-size: 16px;
+  padding: 0 7% 5% 0;
+
+  @include desktop {
+    padding-right: 25%;
+  }
+
+  @include tablets {
+    padding-right: 15%;
+  }
+}
+
+.user__data-content {
+  padding-bottom: 5%;
 }

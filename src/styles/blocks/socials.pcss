@@ -2,6 +2,16 @@
   display: flex;
 }
 
+.socials__header {
+  @include tablets {
+    padding-left: 20%;
+  }
+
+  @include phones {
+    display: none;
+  }
+}
+
 .socials__icon {
   width: 25px;
   height: 25px;

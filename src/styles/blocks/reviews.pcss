@@ -1,11 +1,24 @@
 .reviews {
-  background: url(~images/bg/leavs.png) center top / cover no-repeat;
+  background: url(~images/bg/leavsdt.png) top right / cover no-repeat;
+
+  @include desktop {
+    background: url(~images/bg/leavs.png) top right / cover no-repeat;
+  }
 }
 
 .reviews-title {
   font-weight: bold;
   font-size: 36px;
   margin-bottom: 78px;
+
+  @include tablets {
+    margin-bottom: 0;
+  }
+
+  @include phones {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
 }
 
 
@@ -28,6 +41,15 @@
     top: 0;
     left: 0;
     fill: #586ED3;
+
+    @include phones {
+      content: "";
+      background: none;
+    }
+  }
+  
+  @include phones {
+    padding-left: 0;
   }
 }
 

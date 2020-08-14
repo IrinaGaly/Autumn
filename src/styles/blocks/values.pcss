@@ -1,3 +1,12 @@
+.values {
+  @include tablets {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .values__container {
   display: flex;
   flex-direction: column;
@@ -7,6 +16,14 @@
   @include desktop {
     width: 50%;
   }
+
+  @include desktop {
+    width: 53%;
+  }
+
+  @include phones {
+    width: 90%;
+  }
 }
 
 .values__title-text {
@@ -14,6 +31,23 @@
   font-size: 30px;
   margin-top: 20%;
   margin-bottom: 39px;
+
+  @include tablets {
+    text-align: center;
+  }
+
+  @include phones {
+    text-align: left;
+  }
+}
+
+.values__content {
+  @include tablets {
+    text-align: center;
+  }
+  @include phones {
+    text-align: left;
+  }
 }
 
 .values__widget {
@@ -23,6 +57,16 @@
 
   @include desktop {
       padding-right: 0;
+    }
+
+    @include tablets {
+      display: flex;
+      margin-right: 0;
+    }
+
+    @include phones {
+      display: flex;
+      justify-content: center;
     }
 }
 
