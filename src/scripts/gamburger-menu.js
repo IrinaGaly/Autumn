@@ -1,7 +1,14 @@
-const burgerBtn = document.querySelector('#gamburger-menu');
-const menu = document.querySelector('#gamburger__inner');
-const hero = document.querySelector('#hero__container');
 
-burgerBtn.addEventListener('click', function() {
-  hero.addClass("hero__container_deactive") 
-});
+const burgerBtn = document.getElementById('gamburger-menu');
+const menu = document.getElementById('gamburger__inner');
+const close = document.getElementById('gamburger__close');
+
+
+
+burgerBtn.onclick = function() {
+  menu.style.top = '0';
+};
+
+close.onclick = function() {
+   menu.style.top = '-3000px';
+};

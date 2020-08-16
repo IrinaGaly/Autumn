@@ -1,16 +1,11 @@
 .slider {
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  padding: 12% 0;
 }
-
 
 .slider__header {
   display: flex;
   flex-direction: row;
-  padding-top: 13%;
-  margin-bottom: 95px;
-
+  
   @include tablets {
     margin-bottom: 48px;
   }
@@ -36,17 +31,17 @@
 }
 
 .slider__content {
-  display: flex;
-  flex-direction: row;
-  max-width: 345px;
+  //display: flex;
+  //flex-direction: row;
+  //max-width: 345px;
   padding-bottom: 20%;
 
   @include desktop {
-    width: 58%;
+    //width: 58%;
   } 
 
   @include tablets {
-    width: 58%;
+    //width: 58%;
   }
 
   @include phones {
@@ -57,16 +52,11 @@
 }
 .slider__item {
   padding-right: 30px;
-  max-width: 345px;
+  width: 50%;
 
   @include phones {
-    max-width: 289px;
+    width: 289px;
     padding: 0;
-    display: none;
   }
-}
-
-.active {
-  display: block;
 }
 

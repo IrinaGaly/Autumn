@@ -13,12 +13,12 @@ const display = {
   props: ["currentWork", "works", "currentIndex"],
   template: "#preview-display",
   components: {thumbs, btns},
-  computed: {
-    reversedWorks() {
-      const works = [...this.works];
-      return works.slice(0, 4);
-    },
-  },
+   computed: {
+     reversedWorks() {
+       const works = [...this.works];
+       return works.slice(0, 4);
+     },
+   },
 };
 
 const tags = {
@@ -52,19 +52,19 @@ new Vue({
       return this.works[0];
     }
   },
-  watch: {
-    // следим за currentIndex и применяем метод бесконечности
-    currentIndex(value) {
-      this.makeInfiniteLoopForNdx(value);
-    }
-  },
-  methods: {
-    // метод, с помощью которого делаем круговое переклчение слайдов 
-    makeInfiniteLoopForNdx(index) {
-      const worksNumber = this.works.length - 1;
-      if (index < 0) this.currentIndex = worksNumber ;
-      if (index > worksNumber) this.currentIndex = 0;
-    },
+   watch: {
+     // следим за currentIndex и применяем метод бесконечности
+     currentIndex(value) {
+       this.makeInfiniteLoopForNdx(value);
+     }
+   },
+   methods: {
+     // метод, с помощью которого делаем круговое переклчение слайдов 
+     makeInfiniteLoopForNdx(index) {
+       const worksNumber = this.works.length - 1;
+       if (index < 0) this.currentIndex = worksNumber;
+       if (index > worksNumber) this.currentIndex = 0;
+     },
     //метод указывющий на путь к картинке из JSON
     requireImagesToArray(data) {
       // название метода с переданным аргументом data
@@ -92,6 +92,9 @@ new Vue({
         break;
     }
   },
+    changeThumb(e) {
+      console.log("click");
+    }
 },
   created() {
     // объявление переменно с данными из JSON

@@ -30,13 +30,5 @@
     "photo": "4.jpg",
     "link": "//seznam.cz",
     "desc": "4 This guy did not study web development somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!"
-  },
-  {
-    "id": 5,
-    "title": "5 School of Education website",
-    "skills": "5 HTML, CSS, JavaScript",
-    "photo": "3.jpg",
-    "link": "//seznam.cz",
-    "desc": "5 This guy did not study web development somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!"
   }
 ]

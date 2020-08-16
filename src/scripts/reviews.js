@@ -12,7 +12,14 @@ new Vue({
     return {
       reviews: [],
       sliderOptions: {
-        slidesPerView: 2
+        slidesPerView: 1,
+        spaceBetween: 10,
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 30
+          },
+        }
       }
     }
 
@@ -37,6 +44,32 @@ new Vue({
           break;
       }
     }
+  },
+  mounted() {
+
+     var ref = this.$refs; 
+
+     ref.prevBtn.style.opacity = .2;
+     ref.prevBtn.style.cursor = 'initial';
+   
+     const activeIndex = mySwiper.clickedIndex();
+
+     if (activeIndex == this.slides.length - 1) {
+      ref.nextBtn.style.opacity = .2;
+      ref.nextBtn.style.cursor = 'initial';
+    } else {
+      ref.nextBtn.style.opacity = 1;
+      ref.nextBtn.style.cursor = 'pointer';
+  }  
+      
+      if (activeIndex == 0) {
+        ref.prevBtn.style.opacity = .2;
+        ref.prevBtn.style.cursor = 'initial';
+    } else {
+        ref.prevBtn.style.opacity = 1;
+        ref.prevBtn.style.cursor = 'pointer';
+    }
+     
   },
   created() {
     const data = require("../data/reviews.json");

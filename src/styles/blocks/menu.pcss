@@ -6,6 +6,12 @@
 .menu__list {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+
+  @include phones {
+    justify-content: flex-start;
+    width: 80%;
+  }
 }
 
 .menu__link {

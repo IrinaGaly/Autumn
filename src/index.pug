@@ -43,11 +43,11 @@ block content
         .hero__bottom-buttons
           button.scroll-down-btn Scroll
 
-      .gamburger__inner.gamburger__inner_deactive#gamburger__inner
+      .gamburger__inner#gamburger__inner
         .gamburger-col-left
           a.logo.logo__gamburger(href="#") IG
         .gamburger-col-right
-          a(href="#").gamburger__close
+          a(href="#").gamburger__close#gamburger__close
                   +icon("cross", "close__icon")  
           - var menuItems = ["About", "Skills", "Works", "Reviews"]
           ul.menu__list.gamburger__menu_list
@@ -60,8 +60,6 @@ block content
               li.socials__item.socials__gamburger_item
                 a(href="#", target="_blank").socials__link.socials__gamburger_link
                   +icon(item, "socials__icon, socials__icon_blue")  
-
-
 
     section.about.about__container
       .container

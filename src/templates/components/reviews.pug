@@ -3,10 +3,10 @@ script(type="text/x-template")#slider-container
     .slider__header
       .section-title.reviews-title What speak about me
       .slider__buttons
-        button(type="button" @click="slide('prev')").round-btn.round-btn_prev
-        button(type="button" @click="slide('next')").round-btn.round-btn_next
-    swiper(ref="slider", :options="sliderOptions").slider__content
-      swiper-slide(v-for="review in reviews" :key="review.id").slider-item
+        button(type="button" @click="slide('prev')" ref="prevBtn").round-btn.round-btn_prev
+        button(type="button" @click="slide('next')" ref="nextBtn").round-btn.round-btn_next
+    swiper(ref="slider", :options="sliderOptions")
+      swiper-slide(v-for="review in reviews" :key="review.id")
         .quote
           .quote__text
             p {{review.text}}
