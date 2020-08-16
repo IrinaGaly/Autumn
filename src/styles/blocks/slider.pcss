@@ -4,6 +4,7 @@
   flex-direction: column;
 }
 
+
 .slider__header {
   display: flex;
   flex-direction: row;
@@ -18,7 +19,7 @@
     display: flex;
     flex-direction: column;
   }
-}
+} 
 
 .slider__buttons {
   margin-left: 135px;
@@ -37,23 +38,29 @@
 .slider__content {
   display: flex;
   flex-direction: row;
-  width: 70%;
+  max-width: 345px;
   padding-bottom: 20%;
 
   @include desktop {
-    width: 85%;
-  }
+    width: 58%;
+  } 
 
   @include tablets {
-    width: 100%;
+    width: 58%;
+  }
+
+  @include phones {
+    width: 88%;
+    min-width: 0;
+    position: relative;
   }
 }
 .slider__item {
   padding-right: 30px;
-  width: 50%;
+  max-width: 345px;
 
   @include phones {
-    width: 100%;
+    max-width: 289px;
     padding: 0;
     display: none;
   }
@@ -62,3 +69,4 @@
 .active {
   display: block;
 }
+

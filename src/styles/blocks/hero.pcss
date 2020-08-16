@@ -1,9 +1,20 @@
+.hero {
+  height: 100vh;
+}
 .hero__container {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 60px 0 20px;
+
+  @include tablets {
+    justify-content: unset;
+  }
+}
+
+.hero__container_deactive {
+  display: none;
 }
 
 .hero__bottom-buttons {

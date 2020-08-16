@@ -18,7 +18,7 @@ extends ./main.layout.pug
 block content
   .welcome-section
     section.hero
-      .container.hero__container
+      .container.hero__container#hero__container
         header.header
           a.logo(href="#") IG
           nav.menu.menu__header
@@ -32,11 +32,9 @@ block content
             each item in socials
               li.socials__item
                 a(href="#", target="_blank").socials__link
-                  +icon(item, "socials__icon")
-          a(href="#").gamburger 
-            svg(width="30px", height="25px")
-              use(xlink:href="./images/icons/menu.svg")
-  
+                  +icon(item, "socials__icon")               
+          a(href="#").gamburger#gamburger-menu
+            +icon("menu", "gamburger__icon")
 
         .userinfo
           .userinfo__title Personal website of a web developer
@@ -44,6 +42,27 @@ block content
 
         .hero__bottom-buttons
           button.scroll-down-btn Scroll
+
+      .gamburger__inner.gamburger__inner_deactive#gamburger__inner
+        .gamburger-col-left
+          a.logo.logo__gamburger(href="#") IG
+        .gamburger-col-right
+          a(href="#").gamburger__close
+                  +icon("cross", "close__icon")  
+          - var menuItems = ["About", "Skills", "Works", "Reviews"]
+          ul.menu__list.gamburger__menu_list
+            each item in menuItems
+              li.menu__item.gamburger__menu_item
+                a(href="#").menu__link.gambuerger__menu_link #{item}
+          - var  socials = ["insta", "vk", "github", "envelope"]
+          ul.socials.socials__header.socials__gamburger_nav
+            each item in socials
+              li.socials__item.socials__gamburger_item
+                a(href="#", target="_blank").socials__link.socials__gamburger_link
+                  +icon(item, "socials__icon, socials__icon_blue")  
+
+
+
     section.about.about__container
       .container
         .about__user-inner
@@ -77,88 +96,15 @@ block content
         .values__content
           p This site was developed as part of my studies at the LoftSchool. I'll refresh my content in it a bit later. Until then, look at how cool and beautiful everything is here!
       .values__widget
-        -
-          var skillsCategories = [
-            ["Frontend", ["HTML", "CSS", "JavaScript", "Vue"]],
-            ["Workflow", ["GIT", "Terminal", "Gulp", "Webpack"]],
-          ];
-
-        ul.skills
-          each category in skillsCategories
-            li.skills__item
-              .skills-row
-                .skills-row__title #{category[0]} 
-                ul.skills-row__list
-                  each skill in category[1]
-                    li.skills-row__item
-                      .skill 
-                        svg(viewBox="0 0 100 100").skill__circle-shape
-                          circle(cx="50" cy="50" r="40").skill__circle.skill__circle_layer_under
-                          circle(cx="50" cy="50" r="40" stroke="url(#gradient)" transform="rotate(180 50 50)").skill__circle.skill__circle_layer_above
-                          linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" y2="100%")
-                              stop(offset="0%" stop-color="#DC9322")
-                              stop(offset="0%" stop-color="#D47D1D")
-                          .skill__title #{skill}
+        #skills-component
     section.works
       .container
         .section-title.works-title My works
         .works__content 
-          .works-preview
-            .works-preview__pictures(data-slide="2")
-              +image("content/1.jpg", "works-preview__img")
-              .works-preview__thumbs
-                ul.thumbs
-                  - for (var i = 1; i < 5; i++)
-                    li.thumbs__item
-                      a(href="#", target="_blank").thumbs__link
-                        +image(`content/${i}.jpg`, "thumbs__pic")
-              .works-preview__btns
-                .square-btns
-                  button(type="button").square-btns__item.square-btns__item_next
-                  button(type="button").square-btns__item.square-btns__item_prev
-            .works-preview__info
-              - var tags = ["HTML", "CSS", "JavaScript"];
-              ul.tags
-                each item in tags
-                  li.tags__item
-                    .tag #{item}
-              .works-preview__title School of Education website
-              .works-preview__desc
-                p This guy did not study web development somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!
-              a(href="#", target="_blank").iconed-link View site
+          #preview-component
     section.reviews
       .container
-        .slider
-          .slider__header
-            .section-title.reviews-title What speak about me
-            .slider__buttons
-              button(type="button").round-btn.round-btn_prev
-              button(type="button").round-btn.round-btn_next
-          ul.slider__content
-            li.slider__item.active
-              .quote
-                .quote__text
-                  p This guy did not study web development somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!
-                .quote__user
-                  .user-display
-                    .user-display__avatar
-                      .user-display__avatar-style
-                        +image("content/Dmitriy.png", "user-display__pic")
-                    .user-display__data
-                      .user-display__name Dmitry Kovalchuk
-                      .user-display__occ Founder of Loftschool
-            li.slider__item
-              .quote
-                .quote__text
-                  p This code will stand up to any test. Please do not load the site on too old browsers.
-                .quote__user
-                  .user-display
-                    .user-display__avatar
-                      .user-display__avatar-style
-                        +image("content/Vladimir.png", "user-display__pic")
-                    .user-display__data
-                      .user-display__name Vladimir Sabantsev
-                      .user-display__occ Coach
+        #slider-component
   footer.footer
     .container.footer__container
       .footer__copyright

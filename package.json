@@ -65,12 +65,15 @@
     "last 2 versions"
   ],
   "dependencies": {
+    "jquery": "^3.5.1",
     "normalize.css": "^8.0.1",
     "pcss": "^1.0.0",
     "promptly": "^3.0.3",
     "request": "^2.88.0",
     "signale": "^1.4.0",
+    "swiper": "^6.1.1",
     "vue": "^2.6.7",
+    "vue-awesome-swiper": "^4.1.1",
     "vue-router": "^3.0.2"
   }
 }

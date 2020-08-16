@@ -1,0 +1,20 @@
+script(type="text/x-template")#slider-container
+  .slider
+    .slider__header
+      .section-title.reviews-title What speak about me
+      .slider__buttons
+        button(type="button" @click="slide('prev')").round-btn.round-btn_prev
+        button(type="button" @click="slide('next')").round-btn.round-btn_next
+    swiper(ref="slider", :options="sliderOptions").slider__content
+      swiper-slide(v-for="review in reviews" :key="review.id").slider-item
+        .quote
+          .quote__text
+            p {{review.text}}
+          .quote__user
+            .user-display
+              .user-display__avatar
+                .user-display__avatar-style
+                  img(:src="review.pic").user-display__pic
+              .user-display__data
+                .user-display__name {{review.name}}
+                .user-display__occ {{review.occ}}

@@ -6,6 +6,7 @@
   position: absolute;
   right: -34px;
   bottom: 0;
+
   &:before {
     content: "";
     background: svg-load('arrow-down.svg', fill=#fff, width=100%, height=100%) center center no-repeat;
@@ -18,12 +19,19 @@
     transform: translate(-50%, -50%);
     transition: opacity .3s, margin-top .3s;
     opacity: .3;
+
+    @include phones {
+      width: 12px;
+      height: 16px;
+    }
   }
+
   &:hover {
     &:before {
       opacity: 1;
     }
   }
+
   &_prev {
     &:before {
       transform: translate(-50%, -50%) rotate(180deg);
@@ -33,13 +41,28 @@
         margin-top: 3px;
       }
     }
+    @include phones {
+      bottom: -38px;
+    }
   }
+  
   &_next {
-    bottom: 28px;
+    bottom: 33px;
+
     &:active {
       &:before {
         margin-top: -3px;
       }
     }
+      @include phones {
+        bottom: 20px;
+      }
+    }
   }
+
+  .square-btns__item {
+    @include phones {
+      height: 60px;
+      width: 60px;
+    }
   }

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "1 School of Education website",
+    "skills": "1 HTML, CSS, JavaScript",
+    "photo": "1.jpg",
+    "link": "//yandex.com",
+    "desc": "1 This guy did not study web development somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!"
+  },
+  {
+    "id": 2,
+    "title": "2 School of Education website",
+    "skills": "2 HTML, CSS, JavaScript",
+    "photo": "2.jpg",
+    "link": "//google.com",
+    "desc": "2 This guy did not study web development somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!"
+  },
+  {
+    "id": 3,
+    "title": "3 School of Education website",
+    "skills": "3 HTML, CSS, JavaScript",
+    "photo": "3.jpg",
+    "link": "//yahoo.com",
+    "desc": "3 This guy did not study web development somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!"
+  },
+  {
+    "id": 4,
+    "title": "4 School of Education website",
+    "skills": "4 HTML, CSS, JavaScript",
+    "photo": "4.jpg",
+    "link": "//seznam.cz",
+    "desc": "4 This guy did not study web development somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!"
+  },
+  {
+    "id": 5,
+    "title": "5 School of Education website",
+    "skills": "5 HTML, CSS, JavaScript",
+    "photo": "3.jpg",
+    "link": "//seznam.cz",
+    "desc": "5 This guy did not study web development somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!"
+  }
+]
