@@ -11,6 +11,7 @@ new Vue({
   data() {
     return {
       reviews: [],
+      currentIndex: 0,
       sliderOptions: {
         slidesPerView: 1,
         spaceBetween: 10,
@@ -22,7 +23,6 @@ new Vue({
         }
       }
     }
-
   },
   methods: {
     requireImagesToArray(data) {
@@ -34,7 +34,10 @@ new Vue({
       });
     },
     slide(direction) {
-      const slider = this.$refs["slider"].$swiper
+      const slider = this.$refs["slider"].$swiper;
+      const nextBtn = this.$refs.nextBtn;
+      const prevBtn = this.$refs.prevBtn;
+
       switch(direction) {
         case "next" :
           slider.slideNext();
@@ -42,35 +45,23 @@ new Vue({
         case "prev" :
           slider.slidePrev();
           break;
+        }
+
+      if (slider.isEnd) {
+        nextBtn.classList.add('disabled');
+      } else {
+        nextBtn.classList.remove('disabled');
       }
-    }
-  },
-  mounted() {
 
-     var ref = this.$refs; 
+      if (slider.isBeginning) {
+        prevBtn.classList.add('disabled');
+      } else {
+        prevBtn.classList.remove('disabled');
+      }
 
-     ref.prevBtn.style.opacity = .2;
-     ref.prevBtn.style.cursor = 'initial';
-   
-     const activeIndex = mySwiper.clickedIndex();
+      },
+    },
 
-     if (activeIndex == this.slides.length - 1) {
-      ref.nextBtn.style.opacity = .2;
-      ref.nextBtn.style.cursor = 'initial';
-    } else {
-      ref.nextBtn.style.opacity = 1;
-      ref.nextBtn.style.cursor = 'pointer';
-  }  
-      
-      if (activeIndex == 0) {
-        ref.prevBtn.style.opacity = .2;
-        ref.prevBtn.style.cursor = 'initial';
-    } else {
-        ref.prevBtn.style.opacity = 1;
-        ref.prevBtn.style.cursor = 'pointer';
-    }
-     
-  },
   created() {
     const data = require("../data/reviews.json");
     this.reviews = this.requireImagesToArray(data);
