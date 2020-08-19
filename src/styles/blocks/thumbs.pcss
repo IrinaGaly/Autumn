@@ -23,8 +23,13 @@
 }
 
 .thumbs__pic {
-  height: 66px;
-  width: 117px;
+  height: 100px;
+  width: 178px;
+
+  @include desktop {
+    height: 66px;
+    width: 117px;
+  }
 
    &:hover {
     outline: 3px solid #FF9A00;

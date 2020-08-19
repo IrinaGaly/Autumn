@@ -17,6 +17,7 @@ script(type="text/x-template")#preview-display
       thumbs(
         :works="works",
         :currentWork="currentWork"
+        @switch="$emit('switch', $event)"
       )
     .works-preview__btns
       btns(
@@ -27,6 +28,7 @@ script(type="text/x-template")#preview-thumbs
   ul.thumbs
     li.thumbs__item(
       v-for="slide in works" :key="slide.id"
+      @click="$emit('switch')"
     )
       button.thumbs__link
         img(:src="slide.photo"
@@ -38,11 +40,13 @@ script(type="text/x-template")#preview-btns
     button(
       type="button"
       @click="$emit('slide', 'next')"
+      ref="nextBtn"
     ).square-btns__item.square-btns__item_next
     button(
       type="button"
       @click="$emit('slide', 'prev')"
-    ).square-btns__item.square-btns__item_prev
+      ref="prevBtn"
+    ).square-btns__item.square-btns__item_prev.disabled-btn
 
 script(type="text/x-template")#preview-info
   .works-preview__info

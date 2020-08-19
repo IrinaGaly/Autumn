@@ -48,8 +48,9 @@ new Vue({
     };
   },
   computed: {
+    // вычисляем новое значение при нажатии на кнопку 
     currentWork() {
-      return this.works[0];
+      return this.works[this.currentIndex]; //и возвращаем его
     }
   },
    watch: {
@@ -59,12 +60,12 @@ new Vue({
      }
    },
    methods: {
-     // метод, с помощью которого делаем круговое переклчение слайдов 
-     makeInfiniteLoopForNdx(index) {
-       const worksNumber = this.works.length - 1;
-       if (index < 0) this.currentIndex = worksNumber;
-       if (index > worksNumber) this.currentIndex = 0;
-     },
+    // метод, с помощью которого делаем круговое переклчение слайдов 
+    makeInfiniteLoopForNdx(index) {
+      const worksNumber = this.works.length - 1;
+      if (index < 0) this.currentIndex = worksNumber;
+      if (index > worksNumber) this.currentIndex = 0;
+    },
     //метод указывющий на путь к картинке из JSON
     requireImagesToArray(data) {
       // название метода с переданным аргументом data
@@ -78,24 +79,45 @@ new Vue({
     },
 
   slide(direction) {
+    const nextBtn = document.querySelector(".square-btns__item_next");
+    const prevBtn = document.querySelector(".square-btns__item_prev");
     const lastItem = this.works[this.works.length - 1];
-    switch(direction) {
-      case "next":
-        this.works.push(this.works[0]);
-        this.works.shift();
-        this.currentIndex++
-        break;
-      case "prev":
-        this.works.unshift(lastItem);
-        this.works.pop();
-        this.currentIndex--
-        break;
-    }
-  },
-    changeThumb(e) {
-      console.log("click");
-    }
-},
+    const firstItem = this.works[0];
+    const currentIndex = this.works[this.currentIndex];
+
+    if (currentIndex !== lastItem) {
+      switch(direction) {
+        case "next":
+          this.currentIndex++
+          break;
+        } 
+      }
+
+    if (currentIndex !== firstItem) {
+      switch(direction) {
+        case "prev":
+          this.currentIndex--
+          break;
+        } 
+      }
+
+      if (currentIndex  == lastItem) {
+        nextBtn.classList.add('disabled-btn')
+      }  else {
+        nextBtn.classList.remove('disabled-btn')
+       }  
+
+      if (currentIndex > firstItem) {
+        prevBtn.classList.remove('disabled-btn') 
+      } else if (currentIndex == firstItem) {
+        prevBtn.classList.add('disabled-btn')
+      } 
+      else {
+        prevBtn.classList.remove('disabled-btn')
+      }
+      
+      },
+   },
   created() {
     // объявление переменно с данными из JSON
     const data = require("../data/works.json"); //путь к JSON
