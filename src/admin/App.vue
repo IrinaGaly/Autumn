@@ -56,10 +56,10 @@ export default {
       categories: [],
       emptyCatIsShown: false
     }
-  }
-  // created() {
-  //   this.categories = require("./data/categories.json")
-  // }
+  },
+   created() {
+     this.categories = require("./data/categories.json")
+   }
 };
 </script>
 
