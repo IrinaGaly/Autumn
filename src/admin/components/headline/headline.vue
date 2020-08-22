@@ -1,10 +1,10 @@
 <template> 
   <div class="headline-component">
-    <div class="container">
+    <div class="container headline-container">
       <slot />
       <div class="title">{{title}}</div>
-      <div class="btns">
-        <button class="button">Выйти</button>
+      <div class="buttons">
+        <button type="button" class="btn">Log out</button>
       </div>
     </div>
   </div>
@@ -13,14 +13,12 @@
 <script>
 export default {
   props: {
-    
-      title: String,
-      
+    title: {
+      type: String,
+      default: "Administration panel"
     }
-    
   }
-  
-
+}
 </script>
 
 <style lang="postcss" scoped src="./headline.pcss"></style>

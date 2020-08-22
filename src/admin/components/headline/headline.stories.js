@@ -2,17 +2,15 @@ import headline from "./headline.vue";
 
 export default {
   title: "headline",
-  components: { headline }
+  components: headline
 }
 
 export const defaultView = () => ({
-  components: {headline},
+  components: headline,
   template: `
-  <headline title="Панель управления">
-  </headline>
+    <headline title="Administration panel">
+      
+    </headline>
   `
 });
 
-defaultView.story = {
-  name: "Стандартный вид"
-}

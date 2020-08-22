@@ -21,3 +21,15 @@ export const defaultView = () => ({
 defaultView.story = {
   name: "Стандартный вид",
 };
+
+export const plainView = () => ({
+  components: { roundBtn },
+  template: `
+    <round-btn type="iconed" @click="onClick" />
+  `,
+  methods
+});
+
+defaultView.story = {
+  name: "Без надписи",
+};

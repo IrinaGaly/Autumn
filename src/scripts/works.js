@@ -52,13 +52,15 @@ new Vue({
     currentWork() {
       return this.works[this.currentIndex]; //и возвращаем его
     }
+    
+
   },
-   watch: {
-     // следим за currentIndex и применяем метод бесконечности
-     currentIndex(value) {
-       this.makeInfiniteLoopForNdx(value);
-     }
-   },
+  //  watch: {
+  //    // следим за currentIndex и применяем метод бесконечности
+  //    currentIndex(value) {
+  //      this.makeInfiniteLoopForNdx(value);
+  //    }
+  //  },
    methods: {
     // метод, с помощью которого делаем круговое переклчение слайдов 
     makeInfiniteLoopForNdx(index) {
@@ -81,11 +83,11 @@ new Vue({
   slide(direction) {
     const nextBtn = document.querySelector(".square-btns__item_next");
     const prevBtn = document.querySelector(".square-btns__item_prev");
-    const lastItem = this.works[this.works.length - 1];
-    const firstItem = this.works[0];
-    const currentIndex = this.works[this.currentIndex];
+    const lastItem = this.works.length - 1;
+    const firstItem = 0;
+    
 
-    if (currentIndex !== lastItem) {
+    if (this.currentIndex !== lastItem) {
       switch(direction) {
         case "next":
           this.currentIndex++
@@ -93,7 +95,7 @@ new Vue({
         } 
       }
 
-    if (currentIndex !== firstItem) {
+    if (this.currentIndex !== firstItem) {
       switch(direction) {
         case "prev":
           this.currentIndex--
@@ -101,15 +103,13 @@ new Vue({
         } 
       }
 
-      if (currentIndex  == lastItem) {
+      if (this.currentIndex  == lastItem) {
         nextBtn.classList.add('disabled-btn')
       }  else {
         nextBtn.classList.remove('disabled-btn')
        }  
 
-      if (currentIndex > firstItem) {
-        prevBtn.classList.remove('disabled-btn') 
-      } else if (currentIndex == firstItem) {
+      if (this.currentIndex == firstItem) {
         prevBtn.classList.add('disabled-btn')
       } 
       else {
