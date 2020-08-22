@@ -1,5 +1,5 @@
 <template>
-  <div class="skill-component" v-if="editmode === false">
+  <div class="skill-component" v-if="editmode === false" >
     <div class="title">{{skill.title}}</div>
     <div class="info">
       <div class="percent">{{skill.percent}} %</div>
@@ -9,7 +9,7 @@
       </div>
     </div>
   </div>
-  <div class="skill-component" v-else>
+  <div class="skill-component" v-else >
     <div class="title">
        <app-input noSidePaddings v-model="currentSkill.title" />
     </div>
@@ -18,7 +18,7 @@
     </div>
     <div class="buttons">
       <icon symbol="tick" class="btn" @click="$emit('approve', currentSkill)" />
-      <icon symbol="cross" class="btn" @click="editmode = false"/>
+      <icon symbol="cross" class="btn" @click="editmode = false" />
     </div>
   </div>
 </template>
@@ -39,13 +39,9 @@ export default {
     return {
     editmode: false,
     currentSkill: {
-      // id: 0,
-      // title: this.skill.title,
-      // percent: this.skill.percent
-      id: "",
-      title: "",
-      percent: ""
-
+      id: 0,
+      title: this.skill.title,
+      percent: this.skill.percent
     }
     }
   },

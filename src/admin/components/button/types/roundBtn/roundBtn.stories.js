@@ -30,6 +30,6 @@ export const plainView = () => ({
   methods
 });
 
-defaultView.story = {
+plainView.story = {
   name: "Без надписи",
 };
