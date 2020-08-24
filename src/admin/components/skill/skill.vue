@@ -11,12 +11,14 @@
   </div>
   <div class="skill-component" v-else >
     <div class="title">
-       <app-input noSidePaddings v-model="currentSkill.title" />
+      <app-input noSidePaddings v-model="currentSkill.title" />
+      <div class="message">{{ validation.firstError('currentSkill.title') }}</div>
     </div>
     <div class="percent">
-       <app-input v-model="currentSkill.percent" type="number" min="0" max="100" maxlength="3" />
+      <app-input v-model="currentSkill.percent" type="number" min="0" max="100" maxlength="3" />
+      <div class="message">{{ validation.firstError('currentSkill.percent') }}</div>
     </div>
-    <div class="buttons">
+    <div class="buttons" type="submit" @click="submit">
       <icon symbol="tick" class="btn" @click="$emit('approve', currentSkill)" />
       <icon symbol="cross" class="btn" @click="editmode = false" />
     </div>
@@ -27,7 +29,20 @@
 import input from "../input";
 import icon from "../icon";
 
+import SimpleVueValidator from 'simple-vue-validator';
+const Validator = SimpleVueValidator.Validator;
+
+
 export default {
+  mixins: [SimpleVueValidator.mixin],
+  validators: {
+    'currentSkill.title': function(value) {
+        return Validator.value(value).required();
+      },
+      'currentSkill.percent': function(value) {
+        return Validator.value(value).required();
+      }
+  },
   props: {
     skill: {
       type: Object,
@@ -48,6 +63,17 @@ export default {
   components: {
     icon,
     appInput: input
+  },
+  methods: {
+    submit: function() {
+      this.$validate()
+        .then(function(success) {
+            console.log(success);
+          if (success) {
+            return
+          }
+        });
+      }
   }
 }
 </script>
