@@ -32,6 +32,7 @@
         </ul>
       </div>
     </div>
+    <tags-adder v-model="tags"/>
   </div>
 </template>
 
@@ -42,6 +43,8 @@ import user from "./components/user"
 import navigation from "./components/navigation"
 import button from "./components/button"
 import category from "./components/category"
+import tagsAdder from "./components/tagsAdder"
+
 
 export default {
   components: {
@@ -49,16 +52,19 @@ export default {
     user,
     navigation,
     iconedButton: button,
-    category
+    category,
+    tagsAdder
   },
+
   data() {
     return {
       categories: [],
-      emptyCatIsShown: false
+      emptyCatIsShown: false,
+      tags: ""
     }
   },
    created() {
-     this.categories = require("./data/categories.json")
+     this.categories = require("./data/categories.json");
    }
 };
 </script>

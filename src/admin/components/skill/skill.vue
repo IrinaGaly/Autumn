@@ -1,6 +1,6 @@
 <template>
   <div class="skill-component" v-if="editmode === false" >
-    <div class="title">{{skill.title}}</div>
+    <div class="title">{{currentSkill.title}}</div>
     <div class="info">
       <div class="percent">{{skill.percent}} %</div>
       <div class="buttons">
@@ -18,9 +18,17 @@
       <app-input v-model="currentSkill.percent" type="number" min="0" max="100" maxlength="3" />
       <div class="message">{{ validation.firstError('currentSkill.percent') }}</div>
     </div>
-    <div class="buttons" type="submit" @click="submit">
-      <icon symbol="tick" class="btn" @click="$emit('approve', currentSkill)" />
-      <icon symbol="cross" class="btn" @click="editmode = false" />
+    <div class="buttons">
+      <icon 
+      type="submit"  
+      symbol="tick" 
+      class="btn" 
+      @click="$emit('approve', currentSkill, editmode = false)" />
+      <icon 
+      type="submit" 
+      symbol="cross" 
+      class="btn" 
+      @click="editmode = false" />
     </div>
   </div>
 </template>
@@ -38,6 +46,7 @@ export default {
   validators: {
     'currentSkill.title': function(value) {
         return Validator.value(value).required();
+        editmode = true;
       },
       'currentSkill.percent': function(value) {
         return Validator.value(value).required();
@@ -57,7 +66,8 @@ export default {
       id: 0,
       title: this.skill.title,
       percent: this.skill.percent
-    }
+    }, 
+      
     }
   },
   components: {
@@ -65,7 +75,7 @@ export default {
     appInput: input
   },
   methods: {
-    submit: function() {
+    approve: function() {
       this.$validate()
         .then(function(success) {
             console.log(success);

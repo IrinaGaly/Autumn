@@ -9,11 +9,15 @@ export const defaultView = () => ({
   components: { tagsAdder },
   data() {
     return {
-      tags: "One, two, tree"
+      tags: "One, two, three"
     }
   },
   template: `
-    <tags-adder v-model="tags"/>
+    <tags-adder 
+    v-model="tags"
+    :title="tag" 
+    @click="removeTag(tag)"
+    />
   `
 });
 

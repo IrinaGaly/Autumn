@@ -36,6 +36,7 @@ export const defaultView = () => ({
   template: `
     <tagControl 
       title="tagControl" 
+      @click="onRemove"
     />
   `,
   methods
