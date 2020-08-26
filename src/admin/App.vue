@@ -7,7 +7,7 @@
     <div class="page-content">
       <div class="container">
         <div class="header">
-          <div class="title">Блок "Обо мне"</div>
+          <h1 class="title">Блок «Обо мне»</h1>
           <iconed-button 
           type="iconed" 
           v-if="emptyCatIsShown === false"
@@ -32,7 +32,20 @@
         </ul>
       </div>
     </div>
-    <tags-adder v-model="tags"/>
+    <div class="tags">
+      <tags-adder v-model="tags"/>
+    </div>
+    <div class="works">
+      <div class="work-container">
+        <h1 class="title">Блок «Работы»</h1>
+        <div class="work-content">
+          <ul class="works">
+            <li class="item" v-for="work in works" :key=works.id>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -44,6 +57,7 @@ import navigation from "./components/navigation"
 import button from "./components/button"
 import category from "./components/category"
 import tagsAdder from "./components/tagsAdder"
+//import workCard from "./components/workCard"
 
 
 export default {
@@ -60,10 +74,12 @@ export default {
     return {
       categories: [],
       emptyCatIsShown: false,
-      tags: ""
+      tags: "",
+      works: []
     }
   },
    created() {
+     this.works = require('../data/works.json');
      this.categories = require("./data/categories.json");
    }
 };

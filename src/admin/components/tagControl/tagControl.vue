@@ -6,7 +6,7 @@
     <button 
       v-on="$listeners" 
       v-if="interactive"
-      @click="onRemove"
+      @remove="$emit('remove', $event)"
       class="remove"
       type="button"></button>
   </div>

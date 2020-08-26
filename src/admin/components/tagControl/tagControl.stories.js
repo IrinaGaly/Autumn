@@ -3,7 +3,7 @@ import { action } from "@storybook/addon-actions";
 
 const methods = {
   onClick: action("onClick"),
-  onRemove: action("onRemove")
+  remove: action("remove")
 }
 
 export default {
@@ -36,7 +36,7 @@ export const defaultView = () => ({
   template: `
     <tagControl 
       title="tagControl" 
-      @click="onRemove"
+      @click="remove"
     />
   `,
   methods
