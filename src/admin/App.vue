@@ -32,19 +32,23 @@
         </ul>
       </div>
     </div>
-    <div class="tags">
+    <!-- <div class="tags">
       <tags-adder v-model="tags"/>
-    </div>
-    <div class="works">
-      <div class="work-container">
+    </div> -->
+    <div class="container">
+      <div class="header">
         <h1 class="title">Блок «Работы»</h1>
-        <div class="work-content">
-          <ul class="works">
-            <li class="item" v-for="work in works" :key=works.id>
-            </li>
-          </ul>
-        </div>
       </div>
+      <ul class="works">
+        <li class="work-item"><square-btn 
+          type="square"
+          title="Отправить" 
+          @click="onClick" 
+        /></li>
+        <li class="work-item" v-for="work in works" :key=works.id>
+          <workCard :work="work"/>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -57,7 +61,10 @@ import navigation from "./components/navigation"
 import button from "./components/button"
 import category from "./components/category"
 import tagsAdder from "./components/tagsAdder"
-//import workCard from "./components/workCard"
+import workCard from "./components/work-card"
+import squareBtn from "./components/button"
+
+
 
 
 export default {
@@ -67,7 +74,9 @@ export default {
     navigation,
     iconedButton: button,
     category,
-    tagsAdder
+    workCard,
+    tagsAdder,
+    squareBtn
   },
 
   data() {
@@ -78,6 +87,17 @@ export default {
       works: []
     }
   },
+   methods: {
+     requirePhotos() {
+      this.works = this.works.map(work => {
+         work.photo = require(`../images/content/${work.photo}`)
+         return work;
+      });
+     }
+   },
+   mounted() {
+     this.requirePhotos();
+   },
    created() {
      this.works = require('../data/works.json');
      this.categories = require("./data/categories.json");
