@@ -16,16 +16,13 @@
           @keydown.native.enter="onApprove"
           autofocus="autofocus"
           no-side-paddings="no-side-paddings"
-          v-model="title"
         ></app-input>
-        <div class="message">{{ validation.firstError('title') }}</div>
       </div>
-
       <div class="buttons" >
-        <button class="button-icon" type="submit" @click="submit">
+        <button class="button-icon" >
           <icon symbol="tick" @click="onApprove" ></icon>
         </button>
-        <div class="button-icon">
+        <div class="button-icon" >
           <icon symbol="cross" @click="$emit('remove')"></icon>
         </div>
       </div>
@@ -40,7 +37,7 @@ const Validator = SimpleVueValidator.Validator;
 export default {
   mixins: [SimpleVueValidator.mixin],
   validators: {
-    'title': function(value) {
+    function(value) {
         return Validator.value(value).required();
       },
   },
@@ -64,24 +61,14 @@ export default {
   },
   methods: {
     onApprove() {
+      if (this.value.trim() === "") return false;
       if (this.title.trim() === this.value.trim()) {
         this.editmode = false;
       } else {
         this.$emit("approve", this.value);
       }
     },
-    submit: function() {
-      this.$validate()
-        .then(function(success) {
-            console.log(success);
-          if (success) {
-            return
-          }
-        });
-      },
-  },
- 
-      
+  },  
   components: {
     icon: () => import("components/icon"),
     appInput: () => import("components/input")
