@@ -28,12 +28,14 @@ import card from "../card";
 import editLine from "../editLine";
 import skill from "../skill";
 import skillAddLine from "../skillAddLine";
+import axios from "axios";
+
 export default {
   components: {
     card,
     editLine,
     skill,
-    skillAddLine,
+    skillAddLine
   },
   props: {
     empty: Boolean,

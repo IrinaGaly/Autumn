@@ -11,7 +11,6 @@
         <app-input
           placeholder="Название новой группы"
           :value="value"
-          :errorText="errorText"
           @input="$emit('input', $event)"
           @keydown.native.enter="onApprove"
           autofocus="autofocus"
@@ -23,7 +22,7 @@
           <icon symbol="tick" @click="onApprove" ></icon>
         </button>
         <div class="button-icon" >
-          <icon symbol="cross" @click="$emit('remove')"></icon>
+          <icon symbol="cross" @click="$emit('remove', )"></icon>
         </div>
       </div>
     </div>
@@ -31,16 +30,9 @@
 </template>
 
 <script>
-import SimpleVueValidator from 'simple-vue-validator';
-const Validator = SimpleVueValidator.Validator;
+
 
 export default {
-  mixins: [SimpleVueValidator.mixin],
-  validators: {
-    function(value) {
-        return Validator.value(value).required();
-      },
-  },
   props: {
     value: {
       type: String,

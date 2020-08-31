@@ -1,34 +1,36 @@
 <template>
-  <div class="skill-component" v-if="editmode === false" >
-    <div class="title">{{currentSkill.title}}</div>
+  <div class="skill-component" v-if="currentSkill.editmode === false" >
+    <div class="title">{{skill.title}}</div>
     <div class="info">
       <div class="percent">{{skill.percent}} %</div>
       <div class="buttons">
-        <icon symbol="pencil" class="btn" @click="editmode = true" grayscale />
-        <icon symbol="trash" class="btn" @click="$emit('remove', skill.id)" grayscale />
+        <icon symbol="pencil" class="btn" @click="currentSkill.editmode = true" grayscale />
+        <icon symbol="trash" class="btn" @click="$emit('remove', currentSkill)" grayscale />
       </div>
     </div>
   </div>
   <div class="skill-component" v-else >
     <div class="title">
-      <app-input noSidePaddings v-model="currentSkill.title" />
-      <div class="message">{{ validation.firstError('currentSkill.title') }}</div>
+       <!-- errorMesage="validation.firstError('currentSkill.title')" -->
+      <app-input 
+    
+      noSidePaddings v-model="currentSkill.title" />
     </div>
     <div class="percent">
-      <app-input v-model="currentSkill.percent" type="number" min="0" max="100" maxlength="3" />
-      <div class="message">{{ validation.firstError('currentSkill.percent') }}</div>
+      <!-- :errorMesage="validation.firstError('currentSkill.percent')" -->
+      <app-input 
+      
+      v-model="currentSkill.percent" type="number" min="0" max="100" maxlength="3" />
     </div>
     <div class="buttons">
       <icon 
-      type="submit"  
       symbol="tick" 
-      class="btn" 
-      @click="$emit('approve', currentSkill, editmode = false)" />
+      class="btn" ç
+      @click="$emit('approve', currentSkill)" /> />
       <icon 
-      type="submit" 
       symbol="cross" 
       class="btn" 
-      @click="editmode = false" />
+      @click="currentSkill.editmode = false" />
     </div>
   </div>
 </template>
@@ -36,22 +38,12 @@
 <script>
 import input from "../input";
 import icon from "../icon";
+import { Validator, mixin as ValidatorMixin } from 'simple-vue-validator';
 
-import SimpleVueValidator from 'simple-vue-validator';
-const Validator = SimpleVueValidator.Validator;
 
 
 export default {
-  mixins: [SimpleVueValidator.mixin],
-  validators: {
-    'currentSkill.title': function(value) {
-        return Validator.value(value).required();
-        editmode = true;
-      },
-      'currentSkill.percent': function(value) {
-        return Validator.value(value).required();
-      }
-  },
+  
   props: {
     skill: {
       type: Object,
@@ -63,9 +55,11 @@ export default {
     return {
     editmode: false,
     currentSkill: {
-      id: 0,
+      editmode: false,
+      id: this.skill.id,
       title: this.skill.title,
-      percent: this.skill.percent
+      percent: this.skill.percent,
+      category: this.skill.category
     }, 
       
     }
@@ -74,17 +68,17 @@ export default {
     icon,
     appInput: input
   },
-  methods: {
-    approve: function() {
-      this.$validate()
-        .then(function(success) {
-            console.log(success);
-          if (success) {
-            return
-          }
-        });
-      }
-  }
+  // methods: {
+  //   approve: function() {
+  //     this.$validate()
+  //       .then(function(success) {
+  //           console.log(success);
+  //         if (success) {
+  //           return
+  //         }
+  //       });
+  //     }
+  // }
 }
 </script>
 

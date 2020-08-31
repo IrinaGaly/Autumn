@@ -42,6 +42,7 @@
 import button from "../../components/button";
 import category from "../../components/category";
 import { mapActions, mapState } from "vuex";
+
 export default {
   components: {
     iconedButton: button,
@@ -65,19 +66,20 @@ export default {
       removeSkillAction: "skills/remove",
       editSkillAction: "skills/edit",
     }),
-    async createSkill(skill, categoryId) {
-      const newSkill = {
-        ...skill,
-        category: categoryId
-      }
-      await this.addSkillAction(newSkill);
-      skill.title = "";
-      skill.percent = "";
+   async createSkill(skill, categoryId) {
+     const newSkill = {
+       ...skill,
+       category: categoryId
+     }
+     await this.addSkillAction(newSkill);
+
+     skill.title = "";
+     skill.percent = "";
     },
     removeSkill(skill) {
       this.removeSkillAction(skill);
     },
-    async editSkill(skill) {
+     async editSkill(skill) {
       await this.editSkillAction(skill);
       skill.editmode = false;
     },

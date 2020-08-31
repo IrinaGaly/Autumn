@@ -3,12 +3,14 @@
   :class="['skillAddLine-component', {blocked: blocked}]"
   >
     <div class="title">
-      <app-input v-model="skill.title" placeholder="Новый навык" />
-      <div class="message">{{ validation.firstError('skill.title') }}</div>
+      <app-input 
+      :errorMessage="validation.firstError('skill.title')"
+      v-model="skill.title" placeholder="Новый навык" />
     </div>
     <div class="percent">
-      <app-input v-model="skill.percent" type="number" min="0" max="100" maxlength="3" />
-      <div class="message">{{ validation.firstError('skill.percent') }}</div>
+      <app-input 
+      :errorMessage="validation.firstError('skill.percent')"
+      v-model="skill.percent" type="number" min="0" max="100" maxlength="3" />
     </div>
       <div class="button" >
         <round-btn type="round" @click="handleClick" />
@@ -19,18 +21,19 @@
 <script>
 import input from "../input";
 import button from "../button";
-import { Validator, mixin } from 'simple-vue-validator';
+import { Validator, mixin as ValidatorMixin } from 'simple-vue-validator';
+import axios from "axios";
 
 //const Validator = SimpleVueValidator.Validator;
 
 
 export default {
-  mixins: [Validator.mixin],
+  mixins: [ValidatorMixin],
   validators: {
-    'skill.title': function(value) {
+    "skill.title": (value) => {
         return Validator.value(value).required("Не может быть путсым");
       },
-      'skill.percent': function(value) {
+      "skill.percent": (value) => {
         return Validator.value(value)
         .between(0, 100, "Некорректное значение")
         .integer("Должно быть числом")
@@ -61,9 +64,9 @@ export default {
     }
   },
   methods: {
-    async handleClick() {
-      if (await this.$validate() === false) return;
-      this.$emit('approve', this.skill);
+     async handleClick() {
+      if ((await this.$validate()) === false) return;
+      this.$emit("approve", this.skill);
     }
     // submit: function() {
     //   this.$validate()
