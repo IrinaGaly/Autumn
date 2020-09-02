@@ -4,6 +4,9 @@
       <div class="header">
         <h1 class="title">Блок «Работы»</h1>
       </div>
+      <div class="form-content">
+        <works-form />
+      </div>
       <ul class="works">
         <li class="work-item"><square-btn 
           type="square"
@@ -25,6 +28,8 @@ import tagsAdder from "./../../components/tagsAdder"
 import workCard from "./../../components/work-card"
 import squareBtn from "./../../components/button"
 
+import { mapActions, mapState } from "vuex";
+
 export default {
   components: {
     iconedButton: button,
@@ -42,20 +47,20 @@ export default {
       works: []
     }
   },
-   methods: {
-     requirePhotos() {
-      this.works = this.works.map(work => {
-         work.photo = require(`../../../images/content/${work.photo}`)
-         return work;
-      });
-     }
-   },
-   mounted() {
-     this.requirePhotos();
-   },
+  //  methods: {
+  //    requirePhotos() {
+  //     this.works = this.works.map(work => {
+  //        work.photo = require(`../../../images/content/${work.photo}`)
+  //        return work;
+  //     });
+  //    }
+  //  },
+  //  mounted() {
+  //    this.requirePhotos();
+  //  },
    created() {
      this.works = require('../../../data/works.json');
-     this.categories = require("../../data/categories.json");
+     //this.categories = require("../../data/categories.json");
    }
 }
 </script>

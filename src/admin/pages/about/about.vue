@@ -26,6 +26,8 @@
               @create-skill="createSkill($event, category.id)"
               @edit-skill="editSkill"
               @remove-skill="removeSkill"
+              @remove="categoryToRemove"
+              @remove-category="removeCategory(category.id)"
             />
           </li>
         </ul>
@@ -65,6 +67,8 @@ export default {
       addSkillAction: "skills/add",
       removeSkillAction: "skills/remove",
       editSkillAction: "skills/edit",
+      removeCategoryAction: "categories/delete",
+
     }),
    async createSkill(skill, categoryId) {
      const newSkill = {
@@ -90,11 +94,15 @@ export default {
       } catch (error) {
         console.log(error.message); 
       }
-    }
+    },
+     async removeCategory(categoryId) {
+      await this.removeCategoryAction(categoryId);
+    },
   },
+
   created() {
     this.fetchCategoriesAction();
-     //this.categories = require("../../data/categories.json");
+    //this.categories = require("../../data/categories.json");
 
   },
 };

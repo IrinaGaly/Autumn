@@ -4,6 +4,7 @@
       <div class="text">{{value}}</div>
       <div class="icon">
         <icon symbol="pencil" grayscale @click="editmode = true"></icon>
+        <icon symbol="trash" grayscale @click="$emit('remove-category')"></icon>
       </div>
     </div>
     <div v-else class="title">
@@ -22,7 +23,7 @@
           <icon symbol="tick" @click="onApprove" ></icon>
         </button>
         <div class="button-icon" >
-          <icon symbol="cross" @click="$emit('remove', )"></icon>
+          <icon symbol="cross" @click="onRemove"></icon>
         </div>
       </div>
     </div>
@@ -60,6 +61,11 @@ export default {
         this.$emit("approve", this.value);
       }
     },
+  onRemove() {
+        this.editmode = false;
+        this.$emit('remove');
+    },
+
   },  
   components: {
     icon: () => import("components/icon"),

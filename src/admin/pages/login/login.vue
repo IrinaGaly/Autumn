@@ -21,7 +21,7 @@
           />
         </div>
         <div class="btn">
-          <app-button :disabled="isSubmitDisable" typeAttr="submit"  title="Отправить" />
+          <app-button :disabled="isSubmitDisable" typeAttr="log in"  title="Отправить" />
         </div>
       </form>
     </div>
@@ -33,11 +33,14 @@ import appButton from "../../components/button";
 import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
 import $axios from "../../requests";
 import axios from "axios";
+import {mapActions} from "vuex";
 
 const baseUrl = "https://webdev-api.loftschool.com";
-//const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM3NCwiaXNzIjoiaHR0cDovL3dlYmRldi1hcGkubG9mdHNjaG9vbC5jb20vbG9naW4iLCJpYXQiOjE1OTg2NTI5NTUsImV4cCI6MTU5ODY3MDk1NSwibmJmIjoxNTk4NjUyOTU1LCJqdGkiOiI0czJST21QS2E4eEwzMEpQIn0.WAjSHEBNOkwFR3gGcXOKL8PzI2eGGXWvf32f9SOwhlY";
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM3NCwiaXNzIjoiaHR0cDovL3dlYmRldi1hcGkubG9mdHNjaG9vbC5jb20vcmVmcmVzaFRva2VuIiwiaWF0IjoxNTk4ODkxOTY5LCJleHAiOjE1OTg5MTExOTUsIm5iZiI6MTU5ODg5MzE5NSwianRpIjoiWHBDcXd2bE1SUzRrZWdPeCJ9.cbs1lwKDdxQjUn7YQEUmIbmNcSHk2qcBUOnGu20V-qk"
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM3NCwiaXNzIjoiaHR0cDovL3dlYmRldi1hcGkubG9mdHNjaG9vbC5jb20vcmVmcmVzaFRva2VuIiwiaWF0IjoxNTk5MDczNzc4LCJleHAiOjE1OTkxMDE2ODIsIm5iZiI6MTU5OTA4MzY4MiwianRpIjoiRVF4Y3FIeVV6aFlEWU1xTSJ9.Ugg2QmrBW5kF_o4gKkc8ShU1WasvHCzd3zgYznI7Mqk";
+//const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM3NCwiaXNzIjoiaHR0cDovL3dlYmRldi1hcGkubG9mdHNjaG9vbC5jb20vcmVmcmVzaFRva2VuIiwiaWF0IjoxNTk4ODkxOTY5LCJleHAiOjE1OTg5MTExOTUsIm5iZiI6MTU5ODg5MzE5NSwianRpIjoiWHBDcXd2bE1SUzRrZWdPeCJ9.cbs1lwKDdxQjUn7YQEUmIbmNcSHk2qcBUOnGu20V-qk"
 //const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM3NCwiaXNzIjoiaHR0cDovL3dlYmRldi1hcGkubG9mdHNjaG9vbC5jb20vcmVmcmVzaFRva2VuIiwiaWF0IjoxNTk4NzkyMzM2LCJleHAiOjE1OTg4MTA1NzcsIm5iZiI6MTU5ODc5MjU3NywianRpIjoibmMzalF0amVmZjRrU2RHSSJ9.be8ZbLANJSSXtCe9j9fMc6eTOu26jSl6h7YkoSa95sM";
+//const token = localStorage.getItem('token') || "";
+
 axios.defaults.baseURL = baseUrl;
 axios.defaults.headers['Autorization'] = `Baerer ${token}`;
 
@@ -61,7 +64,7 @@ export default {
   components: { appButton, appInput },
   methods: {
     async handleSubmit() {
-      if ((await this.$validate()) === false) return;
+      if (await this.$validate() === false) return;
         this.isSubmitDisable = true;
         try {
           // сюда попадут данные после успешного промиса

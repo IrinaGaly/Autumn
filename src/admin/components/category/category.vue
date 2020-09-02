@@ -2,8 +2,10 @@
   <card slim>
     <edit-line
       slot="title"
+      :value="title"
       v-model="categoryTitle"
       :editModeByDefault="empty"
+      @remove-category="$emit('remove-category', $event)"
       @remove="$emit('remove', $event)"
       @approve="$emit('approve', $event)"
     />
