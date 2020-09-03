@@ -1,0 +1,87 @@
+@import "../../../styles/mixins.pcss";
+
+.form-content {
+  display: flex;
+
+  @include tablets {
+    flex-direction: column;
+  }
+}
+
+.info {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  @include tablets {
+    width: 100%;
+
+  }
+}
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.work-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.name-input {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.link-input {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.tag-adder {
+  width: 100%;
+  margin-top: 30px;
+}
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.desc-input {
+  width: 100%;
+}
+.add-info-btns {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+
+  @include tablets {
+    justify-content: center;
+
+  }
+}
+.work-text {
+  width: 60%;
+  margin-bottom: 39px;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: row;
+}
+.edit-work {
+  color: #414C63;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.input-container {
+  max-width: 490px;
+  max-height: 280px;
+  background: #DEE4ED;  
+  border: 1px dashed #A1A1A1;
+  margin-right: 35px;
+}

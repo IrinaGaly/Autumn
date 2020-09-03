@@ -12,7 +12,7 @@ import header from "./components/header";
 
 const routes = [
   {
-    path: "/about",
+    path: "/",
     components: {
       default: about,
       header: header

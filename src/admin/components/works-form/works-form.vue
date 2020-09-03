@@ -1,12 +1,20 @@
 <template>
   <div class="form-works-component">
     <form action class="form">
-      <card title="Редактирование работы">
+      <card  class="edit-work" title="Редактирование работы">
         <div slot="content" class="form-content">
+          <div class="input-container">
+            <div class="work-input">
+              <p class="work-text">Перетащите или загрузите для загрузки изображения</p>
+              <div class="btn-container">
+                <appButton typeAttr="file" @change="onChange" />
+              </div>
+            </div>
+          </div>
           <div class="info">
             <app-input class="name-input" title="Название" />
             <app-input class="link-input" title="Ссылка" />
-            <app-input  title="Описание" fieldType="textarea" />
+            <app-input   title="Описание" fieldType="textarea" />
             <tags-adder class="tag-adder" />
             <div class="add-info-btns">
               <appButton plain  title="Отмена"/>
@@ -20,11 +28,14 @@
 </template>
 
 <script>
-import "../styles/main.pcss";
+import "./../../../styles/main.pcss";
 import card from "../card/card";
 import button from "../button/button";
 import input from "../input/input";
 import tagsAdder from "../tagsAdder";
+import appButton from "../../components/button";
+//import addImg from "../addImg"
+
 import { mapActions, mapState } from "vuex";
 
 
@@ -33,9 +44,10 @@ export default {
     card,
     appButton: button,
     appInput: input,
-    tagsAdder
-  },
+    tagsAdder,
+    //addImg
+  }
 };
 </script>
 
-<style lang="postcss" src="./worksForm.pcss" scoped ></style>
+<style lang="postcss" src="./works-form.pcss" scoped ></style>

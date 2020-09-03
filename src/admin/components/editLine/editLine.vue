@@ -52,15 +52,17 @@ export default {
       title: this.value
     };
   },
-  methods: {
-    onApprove() {
-      if (this.value.trim() === "") return false;
+   methods: {
+    async onApprove() {
+      if ((await this.value.trim()) === "") return false;
       if (this.title.trim() === this.value.trim()) {
         this.editmode = false;
       } else {
         this.$emit("approve", this.value);
       }
     },
+
+
   onRemove() {
         this.editmode = false;
         this.$emit('remove');

@@ -5,11 +5,12 @@
         <h1 class="title">Блок «Отзывы»</h1>
       </div>
       <ul class="reviews">
-        <li class="review-item"><square-btn 
+        <li class="review-item">
+          <square-btn 
           type="square"
           title="Отправить" 
-          @click="onClick" 
-        /></li>
+          @click="onClick" />
+        </li>
         <li class="review-item" v-for="review in reviews" :key="review.id" >
           <reviewCard :review="review"/>
         </li>
@@ -44,8 +45,8 @@ export default {
   },
    methods: {
      requirePhotos() {
-      this.review = this.review.map(work => {
-         review.photo = require(`../../../images/content/${review.pic}`)
+      this.reviews = this.reviews.map(review => {
+        review.pic = require(`../../../images/content/${review.pic}`).default;
          return review;
       });
      }

@@ -7,6 +7,7 @@
       :editModeByDefault="empty"
       @remove-category="$emit('remove-category', $event)"
       @remove="$emit('remove', $event)"
+
       @approve="$emit('approve', $event)"
     />
     <template slot="content">

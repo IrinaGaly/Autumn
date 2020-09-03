@@ -21,7 +21,7 @@
           />
         </div>
         <div class="btn">
-          <app-button :disabled="isSubmitDisable" typeAttr="log in"  title="Отправить" />
+          <appButton :disabled="isSubmitDisable" typeAttr="login"  title="Отправить" />
         </div>
       </form>
     </div>
@@ -35,8 +35,9 @@ import $axios from "../../requests";
 import axios from "axios";
 import {mapActions} from "vuex";
 
+
 const baseUrl = "https://webdev-api.loftschool.com";
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM3NCwiaXNzIjoiaHR0cDovL3dlYmRldi1hcGkubG9mdHNjaG9vbC5jb20vcmVmcmVzaFRva2VuIiwiaWF0IjoxNTk5MDczNzc4LCJleHAiOjE1OTkxMDE2ODIsIm5iZiI6MTU5OTA4MzY4MiwianRpIjoiRVF4Y3FIeVV6aFlEWU1xTSJ9.Ugg2QmrBW5kF_o4gKkc8ShU1WasvHCzd3zgYznI7Mqk";
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM3NCwiaXNzIjoiaHR0cDovL3dlYmRldi1hcGkubG9mdHNjaG9vbC5jb20vcmVmcmVzaFRva2VuIiwiaWF0IjoxNTk5MDgzNzc4LCJleHAiOjE1OTkxNjY3NjcsIm5iZiI6MTU5OTE0ODc2NywianRpIjoibDRBdGJXTUpXTkJQdW90YiJ9.WUvi-xgraNpvIjooWMxYSXPNXFzeQNaQgSontkXdHSE";
 //const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM3NCwiaXNzIjoiaHR0cDovL3dlYmRldi1hcGkubG9mdHNjaG9vbC5jb20vcmVmcmVzaFRva2VuIiwiaWF0IjoxNTk4ODkxOTY5LCJleHAiOjE1OTg5MTExOTUsIm5iZiI6MTU5ODg5MzE5NSwianRpIjoiWHBDcXd2bE1SUzRrZWdPeCJ9.cbs1lwKDdxQjUn7YQEUmIbmNcSHk2qcBUOnGu20V-qk"
 //const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM3NCwiaXNzIjoiaHR0cDovL3dlYmRldi1hcGkubG9mdHNjaG9vbC5jb20vcmVmcmVzaFRva2VuIiwiaWF0IjoxNTk4NzkyMzM2LCJleHAiOjE1OTg4MTA1NzcsIm5iZiI6MTU5ODc5MjU3NywianRpIjoibmMzalF0amVmZjRrU2RHSSJ9.be8ZbLANJSSXtCe9j9fMc6eTOu26jSl6h7YkoSa95sM";
 //const token = localStorage.getItem('token') || "";
@@ -63,6 +64,9 @@ export default {
   }),
   components: { appButton, appInput },
   methods: {
+    ...mapActions({
+      showTooltip: "tooltip/show"
+    }),
     async handleSubmit() {
       if (await this.$validate() === false) return;
         this.isSubmitDisable = true;
@@ -76,7 +80,10 @@ export default {
         this.$router.replace('/');
         } 
         catch (error) {
-          console.log('error.response.data.error');
+          this.showTooltip({
+            text: error.response.data.error,
+            type: "error"
+          })
         } 
         finally {
           this.isSubmitDisable = false;

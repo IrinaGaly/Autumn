@@ -6,11 +6,18 @@ export default {
   mutations: {
     SET_CATEGORIES: (state, categories) => (state.data = categories),
     ADD_CATEGORY: (state, category) => state.data.unshift(category),
-    REMOVE_CATEGORY: (state, categoryToRemove) => {
+    DELETE_CATEGORY: (state, categoryToRemove) => {
       state.data = state.data.filter((category) => {
         return category.id !== categoryToRemove;
       })
     },
+
+    EDIT_CATEGORY(state, edCategory) {state.data.forEach((category) => {
+      if(category.id === edCategory.category.id) {
+        category.category = edCategory.category.category;
+      }
+    });
+  },
     ADD_SKILL: (state, newSkill) => {
       // перебираем массив с категориями и формировать новый массив и в него складывать скиллы
       state.data = state.data.map(category => {
@@ -70,10 +77,19 @@ export default {
         console.log(error);
       }
     },
+    async edit({ commit }, updCategory) {
+      try {
+        const { data } = await this.$axios.post(`/categories/${edCategory.id}`, {title: edCategory.title});
+        commit("EDIT_CATEGORY", data);
+      } catch (error) {
+        throw new Error("ошибка");
+      }
+      return true;
+    },
     async delete({ commit }, categoryToRemove) {
       try {
         const { data } = await this.$axios.delete(`/categories/${categoryToRemove}`);
-        commit("REMOVE_CATEGORY", categoryToRemove);
+        commit("DELETE_CATEGORY", categoryToRemove);
       } catch (error) {
         console.log(error);
         throw new Error("Произошла ошибка");

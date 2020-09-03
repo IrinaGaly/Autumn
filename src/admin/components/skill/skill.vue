@@ -24,11 +24,11 @@
       <icon 
       symbol="tick" 
       class="btn" 
-      @click="handleClick"/> />
+      @click="handleClick"/>
       <icon 
       symbol="cross" 
       class="btn" 
-      @click="editHandler" />
+      @click="editHandler"/>
     </div>
   </div>
 </template>

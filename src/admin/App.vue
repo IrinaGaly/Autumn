@@ -2,6 +2,11 @@
   <div class="app-container">
     <router-view name="header" />
     <router-view />
+    <div :class="['notify-container', {active: isTooltipIsshown}]">
+      <div class="notification">
+        <notification />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,7 +20,8 @@ import category from "./components/category"
 import tagsAdder from "./components/tagsAdder"
 import workCard from "./components/work-card"
 import squareBtn from "./components/button"
-
+import notification from "./components/notification"
+import {mapState, mapActions} from "vuex";
 
 
 export default {
@@ -27,7 +33,15 @@ export default {
     category,
     workCard,
     tagsAdder,
-    squareBtn
+    squareBtn,
+    notification
+  },
+  computed: {
+    ...mapState("tooltip", {
+      isTooltipIsshown: state => state.isShow,
+      tooltipText: state => state.text,
+      tooltipText: state => state.type,
+    })
   }
 }
   
