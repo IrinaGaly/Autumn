@@ -1,4 +1,9 @@
 import headline from "./headline.vue";
+import { action } from "@storybook/addon-actions"
+
+const methods = {
+  onChange: action("onChange")
+}
 
 export default {
   title: "headline",
@@ -8,9 +13,10 @@ export default {
 export const defaultView = () => ({
   components: headline,
   template: `
-    <headline title="Administration panel">
+    <headline @action="onChange" title="Administration panel">
    
     </headline>
-  `
+  `,
+  methods
 });
 

@@ -9,5 +9,26 @@ if (token) {
 }
 // записали токен, чтобы если пользователь после аутентификации обновил страницу, остался залогиненым
 
+
+axios.interceptors.response.use(
+  response => response,
+  async error => {
+    const originalRequesr = error.config;
+
+    if (error.response.status === 401) {
+      const response= await axios.post("/refreshToken");
+      const token = response.data.token;
+
+      localStorage.setItem("token", token);
+      axios.defaults.headers["Authorization"] = `Bearer ${token}`;
+      originalRequesr.headers["Authorization"] = `Bearer ${token}`;
+      
+      return axios(originalRequesr);
+    }
+
+    return Promise.reject(error);
+  }
+)
+
 export default axios;
 

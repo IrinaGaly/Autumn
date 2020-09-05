@@ -34,6 +34,7 @@
 </template>
 
 <script>
+
 import input from "../input";
 import icon from "../icon";
 import { Validator, mixin as ValidatorMixin } from 'simple-vue-validator';

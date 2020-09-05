@@ -3,7 +3,7 @@
     <div class="title" v-if="editmode === false">
       <div class="text">{{value}}</div>
       <div class="icon">
-        <icon symbol="pencil" grayscale @click="editmode = true"></icon>
+        <icon class="pencil" symbol="pencil" grayscale @click="editmode = true"></icon>
         <icon symbol="trash" grayscale @click="$emit('remove-category')"></icon>
       </div>
     </div>
@@ -54,11 +54,12 @@ export default {
   },
    methods: {
     async onApprove() {
-      if ((await this.value.trim()) === "") return false;
-      if (this.title.trim() === this.value.trim()) {
-        this.editmode = false;
-      } else {
-        this.$emit("approve", this.value);
+       if ((await this.value.trim()) === "") return false;
+       if (this.title.trim() === this.value.trim()) {
+         this.editmode = false;
+       } else {
+          this.$emit('approve', this.value);
+          
       }
     },
 

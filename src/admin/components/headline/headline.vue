@@ -4,7 +4,7 @@
       <slot />
       <div class="title">{{title}}</div>
       <div class="buttons">
-        <button type="button" class="btn">Log out</button>
+        <button type="button" @click="$emit('change', 'logout')" class="btn">Log out</button>
       </div>
     </div>
   </div>

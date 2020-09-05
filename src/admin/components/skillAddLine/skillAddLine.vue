@@ -12,9 +12,9 @@
       :errorMessage="validation.firstError('skill.percent')"
       v-model="skill.percent" type="number" min="0" max="100" maxlength="3" />
     </div>
-      <div class="button" >
-        <round-btn type="round" @click="handleClick" />
-      </div>
+    <div class="button" >
+      <round-btn type="round" @click="handleClick" />
+    </div>
   </div>
 </template>
 

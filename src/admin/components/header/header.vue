@@ -1,6 +1,6 @@
 <template>
   <div class="header-component">
-    <headline title="Панель администрирования">
+    <headline title="Панель администрирования" >
       <user />
     </headline>  
     <navigation />
@@ -19,8 +19,8 @@ export default {
     user,
     navigation
   }
-} 
+  
+
+}
 </script>
 
-
-</style>

@@ -5,13 +5,14 @@
         <h1 class="title">Блок «Работы»</h1>
       </div>
       <div class="form-content">
-       <!-- <works-form />  -->
+       <worksForm  /> 
       </div>
       <ul class="works">
-        <li class="work-item"><square-btn 
+        <li class="work-item">
+          <square-btn 
           type="square"
           title="Добавить работу" 
-          @click="onClick" 
+          
         /></li>
         <li class="work-item" v-for="work in works" :key="work.id" >
           <workCard :work="work"/>
@@ -23,21 +24,17 @@
 
 <script>
 import button from "./../../components/button"
-import category from "./../../components/category"
-import tagsAdder from "./../../components/tagsAdder"
 import workCard from "./../../components/work-card"
 import squareBtn from "./../../components/button"
-//import worksForm from "./../../components/works-form"
+import worksForm from "./../../components/works-form"
 
 import { mapActions, mapState } from "vuex";
 
 export default {
   components: {
     iconedButton: button,
-    //worksForm,
-    category,
+    worksForm,
     workCard,
-    tagsAdder,
     squareBtn
   },
 
@@ -49,7 +46,13 @@ export default {
       works: []
     }
   },
+  computed: {
+    ...mapState("works",{
+      newWork: state => state.data
+    })
+  },
     methods: {
+      
       requirePhotos() {
        this.works = this.works.map((work) => {
         work.photo = require(`../../../images/content/${work.photo}`).default;

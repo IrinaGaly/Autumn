@@ -2,9 +2,10 @@
   <div class="reviews-componets">
     <div class="container">
       <div class="header">
-        <h1 class="title">Блок «Отзывы»</h1>
+        <h1 class="section-name">Блок «Отзывы»</h1>
       </div>
-      <ul class="reviews">
+      <reviewCard />
+      <ul class="reviews-list">
         <li class="review-item">
           <square-btn 
           type="square"
@@ -23,8 +24,8 @@
 import button from "./../../components/button"
 import category from "./../../components/category"
 import tagsAdder from "./../../components/tagsAdder"
-import reviewCard from "./../../components/review-card"
 import squareBtn from "./../../components/button"
+import reviewCard from "./../../components/review-card"
 
 
 export default {
@@ -62,7 +63,8 @@ export default {
 </script>
 
 <style lang="postcss" >
-  .reviews {
+
+  .reviews-list {
     display: flex;
     flex-wrap: wrap;
   }
@@ -72,7 +74,7 @@ export default {
     margin: 0 18px 28px 0;
   }
 
-  .title {
+  .section-name {
     margin-right: 3.75rem;
     color: #2d3c4e;
     font-weight: 700;

@@ -77,9 +77,9 @@ export default {
         console.log(error);
       }
     },
-    async edit({ commit }, updCategory) {
+    async edit({ commit }, editCategory) {
       try {
-        const { data } = await this.$axios.post(`/categories/${edCategory.id}`, {title: edCategory.title});
+        const { data } = await this.$axios.post(`/categories/${editCategory.id}`, {title: editCategory.title});
         commit("EDIT_CATEGORY", data);
       } catch (error) {
         throw new Error("ошибка");

@@ -11,13 +11,12 @@
             title="Добавить группу"
           />
         </div>
-        <ul class="skills">
+        <ul class="about-skills">
           <li class="item" v-if="emptyCatIsShown">
             <category               
               @remove="emptyCatIsShown = false"
               @approve="createCategory"
               empty 
-              
             />
           </li>
           <li class="item" v-for="category in categories" :key="category.id">
@@ -35,7 +34,7 @@
       </div>
       <!-- <div class="container load" v-else>
         loading...
-      </div> -->
+      </div>  -->
     </div>
   </div>
 </template>
@@ -69,7 +68,7 @@ export default {
       removeSkillAction: "skills/remove",
       editSkillAction: "skills/edit",
       removeCategoryAction: "categories/delete",
-      //editCategoryAction: "categories/edit"
+      editCategoryAction: "categories/edit"
 
     }),
    async createSkill(skill, categoryId) {
@@ -97,12 +96,14 @@ export default {
         console.log(error.message); 
       }
     },
+     async editCategory(category) {
+      await this.editCategoryAction(category);
     // async editCategory(categoryTitle, categoryId) {
     //   await this.editCategoryAction({
     //     title: categoryTitle,
     //     id: categoryId,
     //   })
-    // },
+     },
 
 
      async removeCategory(categoryId) {
