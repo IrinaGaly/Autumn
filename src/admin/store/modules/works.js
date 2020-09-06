@@ -4,8 +4,11 @@ export default {
     data: [],
   },
   mutations: {
-    ADD_WORK(state, newWork) {
-      state.data.push(newWork);
+    // ADD_WORK(state, newWork) {
+    //   state.data.push(newWork);
+    // },
+    ADD_WORK(state, work) {
+      state.data.push(work);
     },
     SET_WORK(state, works) {
       state.data = works;

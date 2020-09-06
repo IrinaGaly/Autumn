@@ -1,4 +1,7 @@
 import Vue from "vue";
+//import config from "../../env.paths.json";
+
+//axios.defaults.baseURL = config.BASE_URL;
 
 const thumbs = {
   props: ["works", "currentWork"],
@@ -118,7 +121,8 @@ new Vue({
       
       },
    },
-  created() {
+   created() {
+    //const { data } = await axios.get("/works/374")
     // объявление переменно с данными из JSON
     const data = require("../data/works.json"); //путь к JSON
     this.works = this.requireImagesToArray(data); // присваивание пустому массиву данные массива из метода requireImagesToArray

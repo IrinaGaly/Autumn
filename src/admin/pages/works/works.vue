@@ -5,10 +5,10 @@
         <div class="header">
           <h1 class="title">Блок «Работы»</h1>
         </div>
-        <div class="form-content" @cancelForm="cancelForm">
+        <div class="form-content" >
          <worksForm 
          v-if="formIsShown === false"
-         @cancelForm="cancelForm"/> 
+         @reset="resetHandler = true" /> 
         </div>
         <ul class="works">
           <li class="work-item">
@@ -61,11 +61,11 @@ export default {
 
   methods: {
       ...mapActions({
-        fetchWork: "works/fetch",
+        fetchWorkAction: "works/fetch",
         removeWorkAction: "works/remove",
       }),
 
-      cancelForm() {
+      resetHandler() {
       this.formIsShown === true;
     },
 
@@ -73,18 +73,21 @@ export default {
       await this.removeWorkAction(workToRemove);
     },
 
-      requirePhotos() {
+      //requirePhotos() {
   //      this.works = this.works.map((work) => {
   //       work.photo = require(`../../../images/content/${work.photo}`).default;
   //       return work;
   //      });
   //     }
-    },
+    //},
 
-    mounted() {
-      this.fetchWork();
+    // mounted() {
+    //   this.fetchWork();
+    // },
+    created() {
+      this.fetchWorkAction();
+      //this.categories = require("../../data/categories.json");
     },
-
     //было до изменений
   //   methods: {
       

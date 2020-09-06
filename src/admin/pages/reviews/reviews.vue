@@ -85,27 +85,6 @@ export default {
 }
 </script>
 
-<style lang="postcss" >
 
-  .reviews-list {
-    display: flex;
-    flex-wrap: wrap;
-  }
+<style lang="postcss" scoped src="./reviews.pcss"></style>
 
-  .review-item {
-    flex: 1;
-    margin: 0 18px 28px 0;
-  }
-
-  .section-name {
-    margin-right: 3.75rem;
-    color: #2d3c4e;
-    font-weight: 700;
-    font-size: 1.3125rem;
-    margin-bottom: 53px;
-  }
-
-  .review-item {
-    width: 340px;
-  }
-</style>

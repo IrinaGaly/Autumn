@@ -1,16 +1,17 @@
 <template>
   <div class="review-card">
     <div class="preview">
-      <img :src="review.pic" class="picture">
+      <img :src="correctReview" class="picture">
       <div class="preview-content">
         <h4 class="review-name">{{review.name}}</h4>
         <p class="review-occ">{{review.occ}}</p>
       </div>
     </div>
+    <pre>{{review}}</pre>
     <div class="desc">
       <p class="text">{{review.text}}</p>
       <div class="review-btn">
-        <icon class="pencil" symbol="pencil" title="Править" />
+        <icon class="pencil" symbol="pencil" @click="handleEdit" title="Править" />
         <icon symbol="cross" title="Удалить" @click="handleRemove" />
       </div>
     </div>
@@ -32,8 +33,26 @@ export default {
     handleRemove() {
       this.$emit("remove-review");
     },
-    
+     handleEdit() {
+      this.$emit("edit-review", this.review);
+    }
   },
+
+  computed: {
+    // correctReviews: function() {
+    //   let newReview = this.review.map(item => {
+    //     item.photo = `https://webdev-api.loftschool.com/${item.photo}`
+    //     return item
+    //   })
+    //   return newReview
+    // }
+    correctReview() {
+      return `https://webdev-api.loftschool.com/${this.review.photo}` 
+
+       // this.review.photo = `https://webdev-api.loftschool.com/${this.review.photo}`
+      
+    }
+  }
 }
 </script>
 

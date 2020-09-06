@@ -9,7 +9,7 @@
                 <div class="photo">
                 </div>
                 <label 
-                  :style="{backgroundImage: `url(${newReview.photo})`}"
+                  
                   >
                   <div class="work-input">
                     <div class="btn-wrap">

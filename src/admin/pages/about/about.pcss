@@ -1,3 +1,5 @@
+@import "../../../styles/mixins.pcss";
+
 .header {
   display: flex;
   margin-bottom: 60px;
@@ -23,7 +25,11 @@
 .item {
   min-width: calc(100% / 2 - 30px);
   margin: 0 30px 25px 0;
+    @include phones {
+      margin-right: 0;
+  }
 }
+
 
 .load {
   color: #2D3C4E;

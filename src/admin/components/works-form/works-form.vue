@@ -24,7 +24,7 @@
             <app-input  v-model="newWork.description" title="Описание" fieldType="textarea" />
             <tags-adder v-model="newWork.techs" class="tag-adder" />
             <div class="add-info-btns">
-              <appButton plain  title="Отмена"/>
+              <appButton plain @click="$emit('resetHandler')" title="Отмена"/>
               <appButton typeAttr="submit" title="СОХРАНИТЬ"/>
             </div>
           </div>
@@ -43,21 +43,43 @@ import input from "../input/input";
 import tagsAdder from "../tagsAdder";
 import appButton from "../../components/button";
 import tooltip from "../../components/tooltip"
-//import addImg from "../addImg"
-
+import { Validator } from "simple-vue-validator";
 import { mapActions, mapState } from "vuex";
 
 
 export default {
+  mixins: [require("simple-vue-validator").mixin],
+  validators: {
+    "newWork.title"(value) {
+      return Validator.value(value).required("Обязательно");
+    },
+    "newWork.link"(value) {
+      return Validator.value(value).required("Обязательно");
+    },
+    "newWork.description"(value) {
+      return Validator.value(value).required("Обязательно");
+    },
+    "newWork.techs"(value) {
+      return Validator.value(value).required("Обязательно");
+    },
+    "newWork.preview"(value) {
+      return Validator.value(value).required("Обязательно");
+    },
+  },
   components: {
     card,
     appButton: button,
     appInput: input,
     tagsAdder,
     tooltip
-    //addImg
+  
   },
   props: {
+     work: {
+      type: Object,
+      default: "",
+    },
+
     formIsShown: {
       type: Boolean
     }
@@ -83,7 +105,7 @@ export default {
     
     async handleSubmit() {
       await this.addNewWork(this.newWork);
-        addNewWork.title = ""
+        //this.text = ""
     //   this.link = "",
     //   this.description = "",
     //   this.techs = "",
@@ -131,6 +153,8 @@ export default {
            })
       }
     },
+
+   
     // cancelForm() {
     //   this.title = "",
     //   this.link = "",

@@ -26,8 +26,9 @@
               @create-skill="createSkill($event, category.id)"
               @edit-skill="editSkill"
               @remove-skill="removeSkill($event, category.id)"
-              @approve="editCategroy(category.id)"
+              @approve="editCategory($event, category.id)"
               @remove-category="removeCategory(category.id)"
+              @reset="resetCategory(category.id)"
             />
           </li>
         </ul>
@@ -44,6 +45,7 @@
 import button from "../../components/button";
 import category from "../../components/category";
 import { mapActions, mapState } from "vuex";
+
 
 export default {
   components: {
@@ -69,7 +71,6 @@ export default {
       editSkillAction: "skills/edit",
       removeCategoryAction: "categories/delete",
       editCategoryAction: "categories/edit"
-
     }),
    async createSkill(skill, categoryId) {
      const newSkill = {
@@ -80,13 +81,16 @@ export default {
      skill.title = "";
      skill.percent = "";
     },
+
     async removeSkill(skill) {
       await this.removeSkillAction(skill);
     },
+
      async editSkill(skill) {
       await this.editSkillAction(skill);
       skill.editmode = false;
     },
+
     async createCategory(categoryTitle) {
       try {
         await this.createCategoryAction(categoryTitle);
@@ -95,25 +99,25 @@ export default {
         console.log(error.message); 
       }
     },
-     async editCategory(category) {
-      await this.editCategoryAction(category);
-    // async editCategory(categoryTitle, categoryId) {
-    //   await this.editCategoryAction({
-    //     title: categoryTitle,
-    //     id: categoryId,
-    //   })
+     //async editCategory(category) {
+      //await this.editCategoryAction(category);
+     async editCategory(categoryTitle, categoryId) {
+       await this.editCategoryAction({
+         title: categoryTitle,
+         id: categoryId,
+       })
      },
-
-
      async removeCategory(categoryId) {
       await this.removeCategoryAction(categoryId);
     },
   },
 
+  // resetCategory() {
+    
+  // },
   created() {
     this.fetchCategoriesAction();
     //this.categories = require("../../data/categories.json");
-
   },
 };
 </script>

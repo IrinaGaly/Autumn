@@ -15,6 +15,7 @@
           @input="$emit('input', $event)"
           @keydown.native.enter="onApprove"
           autofocus="autofocus"
+          v-model="newCategory"
           no-side-paddings="no-side-paddings"
         ></app-input>
       </div>
@@ -31,8 +32,6 @@
 </template>
 
 <script>
-
-
 export default {
   props: {
     value: {
@@ -49,26 +48,28 @@ export default {
   data() {
     return {
       editmode: this.editModeByDefault,
-      title: this.value
+      title: this.value,
+      newCategory: this.value
     };
   },
-   methods: {
+    methods: {
     async onApprove() {
-       if ((await this.value.trim()) === "") return false;
-       if (this.title.trim() === this.value.trim()) {
+       if ((await this.newCategory.trim()) === "") return false;
+       if (this.title.trim() === this.newCategory.trim()) {
          this.editmode = false;
        } else {
-          this.$emit('approve', this.value);
+         // this.$emit('approve', this.value);
+          this.title = this.newCategory
+          this.editmode = false
+          this.$emit("approve", this.newCategory);
           
       }
     },
-
-
-  onRemove() {
-        this.editmode = false;
-        this.$emit('remove');
+   onRemove() {
+         this.editmode = false;
+         this.$emit("remove");
+         this.$emit('reset');
     },
-
   },  
   components: {
     icon: () => import("components/icon"),

@@ -8,7 +8,7 @@
       @remove-category="$emit('remove-category', $event)"
       @remove="$emit('remove', $event)"
       @approve="$emit('approve', $event)"
-      
+      @reset="$emit('reset', $event)"
     />
     <template slot="content">
       <ul class="skills" v-if="empty === false">
@@ -32,7 +32,6 @@ import editLine from "../editLine";
 import skill from "../skill";
 import skillAddLine from "../skillAddLine";
 import axios from "axios";
-
 export default {
   components: {
     card,
@@ -55,6 +54,11 @@ export default {
     return {
       categoryTitle: this.title,
     };
+  },
+   methods: {
+    resetHandler() {
+      this.$emit("reset");
+    },
   },
 };
 </script>
