@@ -14,18 +14,18 @@
 </template>
 
 <script>
-const links = [
-    {id: 0, title: "About", alias: "admin#/about", active: false },
-    {id: 1, title: "Works", alias: "admin#/works", active: true, },
-    {id: 2, title: "Reviews", alias: "admin#/reviews", active: false}
+ const links = [
+     {id: 0, title: "About", alias: "admin#/", active: false },
+     {id: 1, title: "Works", alias: "admin#/works", active: true, },
+     {id: 2, title: "Reviews", alias: "admin#/reviews", active: false}
   ];
-export default {
-  data() {
-    return {
-      links
-    }
-  }
-}
+ export default {
+   data() {
+     return {
+       links
+     }
+   }
+ }
 </script>
 
 

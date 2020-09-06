@@ -21,8 +21,8 @@
           <div class="info">
             <app-input v-model="newWork.title" class="name-input" title="Название" />
             <app-input v-model="newWork.link" class="link-input" title="Ссылка" />
-            <app-input  v-model="newWork.desc" title="Описание" fieldType="textarea" />
-            <tags-adder v-model="newWork.tags" class="tag-adder" />
+            <app-input  v-model="newWork.description" title="Описание" fieldType="textarea" />
+            <tags-adder v-model="newWork.techs" class="tag-adder" />
             <div class="add-info-btns">
               <appButton plain  title="Отмена"/>
               <appButton typeAttr="submit" title="СОХРАНИТЬ"/>
@@ -57,14 +57,19 @@ export default {
     tooltip
     //addImg
   },
+  props: {
+    formIsShown: {
+      type: Boolean
+    }
+  },
   data() {
     return {
       hovered: false,
       newWork: {
         title: "",
         link: "",
-        desc: "",
-        tags: "",
+        description: "",
+        techs: "",
         photo: {},
         preview: ""
       }
@@ -75,19 +80,15 @@ export default {
       addNewWork: "works/add",
     }),
 
-    async addNewWork(workTitle) {
-      try {
-        await this.addNewWork(workTitle);
-      } catch (error) {
-        console.log(error.message); 
-      }
-    },
-    handleDragOver(e) {
-      e.preventDefault();
-      this.hovered = true;
-    },
+    
     async handleSubmit() {
       await this.addNewWork(this.newWork);
+        addNewWork.title = ""
+    //   this.link = "",
+    //   this.description = "",
+    //   this.techs = "",
+    //   this.preview = "",
+    //   this.photo = {}
     }, 
     
     handleChange(event) {
@@ -101,6 +102,12 @@ export default {
       this.renderPhoto(file);
       this.hovered = false;
     },
+    
+    handleDragOver(e) {
+      e.preventDefault();
+      this.hovered = true;
+    },
+
     renderPhoto(file) {
       const reader = new FileReader();
 
@@ -124,6 +131,14 @@ export default {
            })
       }
     },
+    // cancelForm() {
+    //   this.title = "",
+    //   this.link = "",
+    //   this.description = "",
+    //   this.techs = "",
+    //   this.preview = "",
+    //   this.photo = {}
+    // }
   }
   
 };

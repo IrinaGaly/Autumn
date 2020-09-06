@@ -11,7 +11,7 @@
       <p class="text">{{review.text}}</p>
       <div class="review-btn">
         <icon class="pencil" symbol="pencil" title="Править" />
-        <icon symbol="cross" title="Удалить" />
+        <icon symbol="cross" title="Удалить" @click="handleRemove" />
       </div>
     </div>
   </div>
@@ -27,7 +27,13 @@ export default {
     review: {
       type: Object
       }
-    }
+    },
+    methods: {
+    handleRemove() {
+      this.$emit("remove-review");
+    },
+    
+  },
 }
 </script>
 

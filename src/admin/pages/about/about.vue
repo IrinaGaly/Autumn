@@ -77,7 +77,6 @@ export default {
        category: categoryId
      }
      await this.addSkillAction(newSkill, newSkill.title);
-
      skill.title = "";
      skill.percent = "";
     },

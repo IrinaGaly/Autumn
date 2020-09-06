@@ -4,7 +4,9 @@
     <router-view />
     <div :class="['notify-container', {active: isTooltipIsshown}]">
       <div class="notification">
-        <notification />
+        <notification 
+          
+        />
       </div>
     </div>
   </div>
@@ -35,6 +37,11 @@ export default {
     tagsAdder,
     squareBtn,
     notification
+  },
+   methods: {
+    ...mapActions({
+      hideTooltip: "tooltips/hide"
+    })
   },
   computed: {
     ...mapState("tooltip", {

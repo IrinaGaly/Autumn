@@ -1,8 +1,17 @@
+
 <template>
   <button
+    type="submit"
     :class="['default-btn-container', 'btn-decorator', {disabled}, {plain}]"
-    v-if="typeAttr !== 'file'"
-    :type="typeAttr"
+    v-if="typeAttr === 'submit'"
+    v-on="$listeners"
+    :disabled="disabled"
+  >{{title}}</button>
+
+  <button
+    type="button"
+    :class="['default-btn-container', 'btn-decorator', {disabled}, {plain}]"
+    v-else-if="typeAttr === 'button'"
     v-on="$listeners"
     :disabled="disabled"
   >{{title}}</button>
@@ -12,6 +21,9 @@
     <input class="btn-file-input" type="file" v-on="$listeners" />
   </label>
 </template>
+
+
+
 <script>
 export default {
   props: {

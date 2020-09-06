@@ -1,51 +1,67 @@
 <template>
-  <div class="work-card">
-    <div class="preview">
-      <img :src="work.photo" class="picture">
-      <div class="tags">
-        <ul class="tags-list">
-          <li class="tags-item" v-for="tag in tags" :key="tag.id">
+  <div class="card-work-component">
+    <div class="card-work-preview">
+      <img class="card-work-img" :src="cover" />
+      <div class="card-work-tags">
+        <ul class="card-work-tags__list">
+          <li
+            class="card-work-tags__item"
+            v-if="tag.trim()"
+            v-for="(tag, index) in tags"
+            :key="`${tag}${index}`"
+          >
             <tag :title="tag" />
           </li>
         </ul>
       </div>
     </div>
-    <div class="desc">
-      <h4 class="work-title">{{work.title}}</h4>
-      <p class="text">{{work.desc}}</p>
-      <a class="link">{{work.link}}</a>
-      <div class="work-btn">
-        <icon class="pencil" symbol="pencil" title="Править" />
-        <icon symbol="cross" title="Удалить" />
+    <div class="card-work-desc">
+      <div class="card-work-desc-content">
+        <h4 class="card-work-title">{{work.title}}</h4>
+        <p class="card-work-text">{{work.description}}</p>
+        <a :href="work.link" class="work-link">{{work.link}}</a>
+        <div class="card-work-btns">
+          <icon symbol="pencil" title="Править" @click="handleUpdate" />
+          <icon symbol="cross" title="Удалить" @click="handleRemove" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import icon from "../icon";
+import "../../../styles/main.pcss";
+import icon from "./../../components/icon/icon";
 import tag from "../tag";
-
 export default {
-
   components: {
     icon,
-    tag
+    tag,
   },
   props: {
     work: {
-      type: Object
-      }
+      type: Object,
     },
-    computed: {
-      tags() {
-        return this.work.skills.split(',')
-      }
+  },
+  methods: {
+    handleRemove() {
+      this.$emit("remove-work");
+    },
+    handleUpdate() {
+      //работает
+      console.log("update");
     }
-    
-}
+  },
+  computed: {
+    cover() {
+      return `https://webdev-api.loftschool.com/${this.work.photo}`;
+    },
+    tags() {
+      return this.work.techs.trim().split(",");
+    },
+  },
+};
 </script>
-
 <style lang="postcss" src="./work-card.pcss">
  
 </style>
