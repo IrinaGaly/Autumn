@@ -19,6 +19,12 @@ export default {
     //   }
     // });
   },
+    EDIT_CATEGORY(state, editCategory) {state.data.forEach((category) => {
+      if(category.id === editCategory.category.id) {
+        category.category = editCategory.category.category;
+      }
+    });
+  },
     ADD_SKILL: (state, newSkill) => {
       // перебираем массив с категориями и формировать новый массив и в него складывать скиллы
       state.data = state.data.map(category => {
@@ -54,12 +60,7 @@ export default {
       }
       state.data = state.data.map(findCategory);
     },
-    EDIT_CATEGORY(state, editCategory) {state.data.forEach((category) => {
-      if(category.id === editCategory.category.id) {
-        category.category = editCategory.category.category;
-      }
-    });
-  },
+    
 
   actions: {
     async create({ commit }, title) {

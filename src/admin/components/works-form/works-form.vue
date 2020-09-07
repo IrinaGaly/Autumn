@@ -13,7 +13,7 @@
             <div class="work-input">
               <p class="work-text">Перетащите или загрузите для загрузки изображения</p>
               <div class="btn-container">
-                <appButton typeAttr="file"
+                <appButton typeAttr="file" title="Загрузить"
                 @change="handleChange" />
               </div>
             </div>
@@ -76,12 +76,18 @@ export default {
   },
   props: {
      work: {
-      type: Object,
-      default: "",
+      type: Array,
+    
     },
 
     formIsShown: {
       type: Boolean
+    }
+  },
+  created() {
+    if (this.work) {
+      this.newWork = { ...this.work };
+      this.preview = `https://webdev-api.loftschool.com/${this.work.photo}`;
     }
   },
   data() {
@@ -100,6 +106,7 @@ export default {
   methods: {
      ...mapActions({
       addNewWork: "works/add",
+      fetchWorkAction: "works/fetch",
     }),
 
     
@@ -152,8 +159,7 @@ export default {
              type: "error"
            })
       }
-    },
-
+    }
    
     // cancelForm() {
     //   this.title = "",

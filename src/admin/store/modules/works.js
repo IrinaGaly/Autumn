@@ -4,13 +4,11 @@ export default {
     data: [],
   },
   mutations: {
-    // ADD_WORK(state, newWork) {
-    //   state.data.push(newWork);
-    // },
-    ADD_WORK(state, work) {
-      state.data.push(work);
+  
+    ADD_WORK(state, newWork) {
+      state.data.unshift(newWork);
     },
-    SET_WORK(state, works) {
+    SET_WORKS(state, works) {
       state.data = works;
     },
     REMOVE_WORKS(state, removeWork) {
@@ -18,10 +16,10 @@ export default {
         return work.id !== removeWork;
       });
     },
-    UPDATE_WORKS(state, updateWork) {
+    EDIT_WORKS(state, editWork) {
       state.data.forEach((work) => {
-        if (work.id === updateWork.work.id) {
-          work.work = updateWork.work.work;
+        if (work.id === editWork.work.id) {
+          work.work = editWork.work.work;
         }
       });
     },
@@ -35,7 +33,7 @@ export default {
         formData.append(item, newWork[item]);
       });
       try {
-        const { data } = await this.$axios.post("/works", formData);
+        const { data } = await this.$axios.post('/works', formData);
         commit("ADD_WORK", data);
       } catch (error) {
         console.log("error");
@@ -45,8 +43,8 @@ export default {
   
     async fetch({ commit }) {
       try {
-        const { data } = await this.$axios.get("/works/374");
-        commit("SET_WORK", data);
+        const { data } = await this.$axios.get('/works/374');
+        commit("SET_WORKS", data);
       }
       catch (error) {
         console.log("error");

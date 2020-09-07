@@ -8,7 +8,8 @@
         <div class="form-content" >
          <worksForm 
          v-if="formIsShown === false"
-         @reset="resetHandler = true" /> 
+         @reset="resetHandler = true" 
+          :work="work"/> 
         </div>
         <ul class="works">
           <li class="work-item">
@@ -20,6 +21,7 @@
           <li class="work-item" v-for="work in works" :key="work.id"
            >
             <workCard :work="work"
+            @edit-work="editWork"
             @remove-work="removeWork(work.id)"/>
           </li>
         </ul>
@@ -45,11 +47,9 @@ export default {
   },
 
   data() {
-     return {
-//       categories: [],
+     return {  
       formIsShown: true,
-//       tags: "",
-       //works: []  
+       work: []  
     } 
   },
 
@@ -72,39 +72,16 @@ export default {
     async removeWork(workToRemove) {
       await this.removeWorkAction(workToRemove);
     },
-
-      //requirePhotos() {
-  //      this.works = this.works.map((work) => {
-  //       work.photo = require(`../../../images/content/${work.photo}`).default;
-  //       return work;
-  //      });
-  //     }
-    //},
-
-    // mounted() {
-    //   this.fetchWork();
-    // },
+    async editWork() {
+      await (this.formIsShown = false);
+      this.work = work;
+       
+    }
+    },
     created() {
       this.fetchWorkAction();
       //this.categories = require("../../data/categories.json");
     },
-    //было до изменений
-  //   methods: {
-      
-  //     requirePhotos() {
-  //      this.works = this.works.map((work) => {
-  //       work.photo = require(`../../../images/content/${work.photo}`).default;
-  //       return work;
-  //      });
-  //     }
-  //   },
-  //   mounted() {
-  //     this.requirePhotos();
-  //   },
-  //  created() {
-  //    this.works = require('../../../data/works.json');
-  //    //this.categories = require("../../data/categories.json");
-    }
 }
 </script>
 

@@ -8,9 +8,7 @@
               <div class="review-col">
                 <div class="photo">
                 </div>
-                <label 
-                  
-                  >
+                <label >
                   <div class="work-input">
                     <div class="btn-wrap">
                       <appButton plain typeAttr="file" title="Добавить фотографию"
@@ -26,7 +24,7 @@
               </div>
             </div>
             <div class="add-info-btns">
-              <appButton plain  title="Отмена"/>
+              <appButton plain @click="$emit('edit')" title="Отмена"/>
               <appButton typeAttr="submit" title="СОХРАНИТЬ"/>
             </div>
           </div>
@@ -55,9 +53,16 @@ export default {
     appInput: input,
     button
   },
+  props: {
+    review: {
+      type: Object
+    },
+    shownForm: {
+      type: Boolean,
+    },
+  },
    data() {
     return {
-      hovered: false,
       newReview: {
         author: "",
         occ: "",
@@ -76,7 +81,7 @@ export default {
     
     async handleSubmit() {
       await this.addNewReview(this.newReview);
-        
+      this.$emit("submit"); 
     }, 
     
      handleChange(event) {

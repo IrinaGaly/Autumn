@@ -5,9 +5,9 @@ export default {
   },
   mutations: {
     ADD_REVIEW(state, newReview) {
-      state.data.push(newReview);
+      state.data.unshift(newReview);
     },
-    SET_REVIEW(state, reviews) {
+    SET_REVIEWS(state, reviews) {
       state.data = reviews;
     },
     REMOVE_REVIEW(state, removeReview) {
@@ -15,10 +15,10 @@ export default {
         return work.id !== removeReview;
       });
     },
-    UPDATE_REVIEWS(state, updateReview) {
+    EDIT_REVIEWS(state, editReview) {
       state.data.forEach((review) => {
-        if (review.id === updateReview.review.id) {
-          review.review = updateReview.review;
+        if (review.id === editReview.review.id) {
+          review.review = editReview.review;
         }
       });
     },
@@ -32,7 +32,7 @@ export default {
         formData.append(item, newReview[item]);
       });
       try {
-        const { data } = await this.$axios.post("/reviews", formData);
+        const { data } = await this.$axios.post('/reviews', formData);
         commit("ADD_REVIEW", data);
       } catch (error) {
         console.log("error");
@@ -42,8 +42,8 @@ export default {
   
     async fetch({ commit }) {
       try {
-        const { data } = await this.$axios.get("/reviews/374");
-        commit("SET_REVIEW", data);
+        const { data } = await this.$axios.get('/reviews/374');
+        commit("SET_REVIEWS", data);
       }
       catch (error) {
         console.log("error");
@@ -59,6 +59,19 @@ export default {
 
       return true;
     },
-    
+    async edit({ commit }, editReview) {
+      const editFormData = new FormData();
+
+      Object.keys(editReview).forEach((item) => {
+        editFormData.append(item, editReview[item]);
+      });
+      try {
+        const { data } = await this.$axios.post(`/reviews/${editReview.id}`, editFormData);
+        commit("EDIT_REVIEWS", data);
+      } catch (error) {
+        console.log("ОЩИБКА");
+      }
+      return true;
+    },    
   }
 }

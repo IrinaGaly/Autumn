@@ -1,7 +1,8 @@
 import Vue from "vue";
-//import config from "../../env.paths.json";
+import axios from "axios";
+import config from "../../env.paths.json";
 
-//axios.defaults.baseURL = config.BASE_URL;
+axios.defaults.baseURL = config.BASE_URL;
 
 const thumbs = {
   props: ["works", "currentWork"],
@@ -35,7 +36,9 @@ const info = {
   components: {tags},
   computed: {
     tagsArray() {
-      return this.currentWork.skills.split(",");
+      //return this.currentWork.skills.split(",");
+        return this.currentWork.techs.split(",");
+      
     }
   }
 };
@@ -72,16 +75,16 @@ new Vue({
       if (index > worksNumber) this.currentIndex = 0;
     },
     //метод указывющий на путь к картинке из JSON
-    requireImagesToArray(data) {
-      // название метода с переданным аргументом data
-      return data.map(item => {
-        // возвращает массив с измененными данными
-        const requireImage = require(`../images/content/${item.photo}`)
-          .default; //  объявляем путь к картинке понятный webpack
-        item.photo = requireImage; //присваиваем новое значение айтему
-        return item;
-      });
-    },
+    // requireImagesToArray(data) {
+    //   // название метода с переданным аргументом data
+    //   return data.map(item => {
+    //     // возвращает массив с измененными данными
+    //     const requireImage = require(`../images/content/${item.photo}`)
+    //       .default; //  объявляем путь к картинке понятный webpack
+    //     item.photo = requireImage; //присваиваем новое значение айтему
+    //     return item;
+    //   });
+    // },
 
   slide(direction) {
     const nextBtn = document.querySelector(".square-btns__item_next");
@@ -121,10 +124,14 @@ new Vue({
       
       },
    },
-   created() {
-    //const { data } = await axios.get("/works/374")
+   async created() {
+    const { data } = await axios.get("/works/374")
+    this.works = data.map((work) => {
+      work.photo = `https://webdev-api.loftschool.com/${work.photo}`;
+      return work;
+    })
     // объявление переменно с данными из JSON
-    const data = require("../data/works.json"); //путь к JSON
-    this.works = this.requireImagesToArray(data); // присваивание пустому массиву данные массива из метода requireImagesToArray
+    //const data = require("../data/works.json"); //путь к JSON
+    //this.works = this.requireImagesToArray(data); // присваивание пустому массиву данные массива из метода requireImagesToArray
   },
 });

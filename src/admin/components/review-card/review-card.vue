@@ -3,11 +3,10 @@
     <div class="preview">
       <img :src="correctReview" class="picture">
       <div class="preview-content">
-        <h4 class="review-name">{{review.name}}</h4>
+        <h4 class="review-name">{{review.author}}</h4>
         <p class="review-occ">{{review.occ}}</p>
       </div>
     </div>
-    <pre>{{review}}</pre>
     <div class="desc">
       <p class="text">{{review.text}}</p>
       <div class="review-btn">

@@ -6,10 +6,8 @@
         <ul class="card-work-tags__list">
           <li
             class="card-work-tags__item"
-            v-if="tag.trim()"
-            v-for="(tag, index) in tags"
-            :key="`${tag}${index}`"
-          >
+            v-if="tag.trim()" v-for="(tag, index) in tags"
+            :key="`${tag}${index}`">
             <tag :title="tag" />
           </li>
         </ul>
@@ -21,8 +19,8 @@
         <p class="card-work-text">{{work.description}}</p>
         <a :href="work.link" class="work-link">{{work.link}}</a>
         <div class="card-work-btns">
-          <icon symbol="pencil" title="Править" @click="handleUpdate" />
-          <icon symbol="cross" title="Удалить" @click="handleRemove" />
+          <icon symbol="pencil" title="Править" @click="editHandler" />
+          <icon symbol="cross" title="Удалить" @click="onRemove" />
         </div>
       </div>
     </div>
@@ -44,12 +42,12 @@ export default {
     },
   },
   methods: {
-    handleRemove() {
+    onRemove() {
       this.$emit("remove-work");
     },
-    handleUpdate() {
-      //работает
-      console.log("update");
+    editHandler() {
+      this.$emit("edit-work", this.work);
+      console.log("ok");
     }
   },
   computed: {

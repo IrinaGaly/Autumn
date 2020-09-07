@@ -5,8 +5,11 @@
         <div class="header">
           <h1 class="section-name">Блок «Отзывы»</h1>
         </div>
-        <reviewForm 
-        v-if="formIsShown === false"/>
+        <reviewForm :review="review"
+        v-if="formIsShown === false"
+        @submit="submitForm"
+        
+        />
         <ul class="reviews-list">
           <li class="review-item">
             <square-btn 
@@ -16,7 +19,9 @@
           </li>
           <li class="review-item" v-for="review in reviews" :key="review.id" >
             <reviewCard :review="review"
-             @remove-review="removeReview(review.id)"/>
+              @edit-review="editReview(review)"
+             @remove-review="removeReview(review.id)"
+             />
           </li>
         </ul>
       </div>
@@ -47,6 +52,7 @@ export default {
   data() {
     return {
       formIsShown: true,
+      review: Array,
     }
   },
   computed: {
@@ -56,18 +62,20 @@ export default {
   },
      methods: {
       ...mapActions({
-        fetchReview: "reviews/fetch",
+        fetchReviewAction: "reviews/fetch",
         removeReviewAction: "reviews/remove",
+        editReviewAction: "reviews/edit"
       }),
 
-
+    
        async removeReview(reviewToRemove) {
         await this.removeReviewAction(reviewToRemove);
     },
-     mounted() {
-      this.fetchReview();
+      
+     },
+     created() {
+      this.fetchReviewAction();
     },
-     }
   //    requirePhotos() {
   //     this.reviews = this.reviews.map(review => {
   //       review.pic = require(`../../../images/content/${review.pic}`).default;
