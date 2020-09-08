@@ -7,16 +7,18 @@
         </div>
         <div class="form-content" >
          <worksForm 
-         v-if="formIsShown === false"
-         @reset="resetHandler = true" 
-          :work="work"/> 
+         v-if="formIsShown === true"
+         @reset="resetHandler = false" 
+         :work="work"
+         @submit="submitForm"/> 
         </div>
         <ul class="works">
           <li class="work-item">
             <square-btn 
             type="square"
             title="Добавить работу" 
-            @click="formIsShown = false"
+            @closeForm="formIsShown"
+            @click="formIsShown = true"
           /></li>
           <li class="work-item" v-for="work in works" :key="work.id"
            >
@@ -48,8 +50,8 @@ export default {
 
   data() {
      return {  
-      formIsShown: true,
-       work: []  
+      formIsShown: false,
+       work: null
     } 
   },
 
@@ -59,25 +61,34 @@ export default {
     })
   },
 
+   watch: {
+    formIsShown() {
+      if (!this.formIsShown) {
+        this.work = null;
+      }
+    },
+  },
+
   methods: {
       ...mapActions({
         fetchWorkAction: "works/fetch",
         removeWorkAction: "works/remove",
+        editWorkAction: "works/edit"
       }),
 
-      resetHandler() {
-      this.formIsShown === true;
-    },
+     
 
     async removeWork(workToRemove) {
       await this.removeWorkAction(workToRemove);
     },
-    async editWork() {
-      await (this.formIsShown = false);
+
+    editWork(editWork) {
+      this.formIsShown = true;
       this.work = work;
        
     }
     },
+
     created() {
       this.fetchWorkAction();
       //this.categories = require("../../data/categories.json");

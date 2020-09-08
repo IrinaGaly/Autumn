@@ -8,7 +8,7 @@
         <reviewForm :review="review"
         v-if="formIsShown === false"
         @submit="submitForm"
-        
+        @close="formIsShown = true"
         />
         <ul class="reviews-list">
           <li class="review-item">
@@ -19,7 +19,7 @@
           </li>
           <li class="review-item" v-for="review in reviews" :key="review.id" >
             <reviewCard :review="review"
-              @edit-review="editReview(review)"
+             @edit-review="editReview(review)"
              @remove-review="removeReview(review.id)"
              />
           </li>
@@ -52,27 +52,40 @@ export default {
   data() {
     return {
       formIsShown: true,
-      review: Array,
+      review: null,
     }
   },
   computed: {
-    ...mapState("reviews",{
+    ...mapState("reviews", {
       reviews: state => state.data
     })
   },
-     methods: {
-      ...mapActions({
-        fetchReviewAction: "reviews/fetch",
-        removeReviewAction: "reviews/remove",
-        editReviewAction: "reviews/edit"
-      }),
+  methods: {
+  ...mapActions({
+    fetchReviewAction: "reviews/fetch",
+    removeReviewAction: "reviews/remove",
+    editReviewAction: "reviews/edit"
+  }),
 
-    
-       async removeReview(reviewToRemove) {
-        await this.removeReviewAction(reviewToRemove);
+  async removeReview(reviewToRemove) {
+    await this.removeReviewAction(reviewToRemove);
+  },
+
+  watch: {
+  formIsShown() {
+    if (!this.formIsShown) {
+      this.review = null;
+      }
+      },
     },
+  },
       
-     },
+  editReview(review) {
+    this.formIsShown = true;
+    this.review = review;
+  },
+
+
      created() {
       this.fetchReviewAction();
     },

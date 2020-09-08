@@ -9,9 +9,10 @@
             hovered: hovered }]" 
             @dragover="handleDragOver"
             @dragleave="hovered = false"
-            @drop="handleChange">
+            @drop="handleChange"
+            >
             <div class="work-input">
-              <p class="work-text">Перетащите или загрузите для загрузки изображения</p>
+              <p class="work-text">Перетащите или загрузите изображениe</p>
               <div class="btn-container">
                 <appButton typeAttr="file" title="Загрузить"
                 @change="handleChange" />
@@ -24,7 +25,7 @@
             <app-input  v-model="newWork.description" title="Описание" fieldType="textarea" />
             <tags-adder v-model="newWork.techs" class="tag-adder" />
             <div class="add-info-btns">
-              <appButton plain @click="$emit('resetHandler')" title="Отмена"/>
+              <appButton plain @click="$emit('closeForm')" title="Отмена"/>
               <appButton typeAttr="submit" title="СОХРАНИТЬ"/>
             </div>
           </div>
@@ -76,8 +77,8 @@ export default {
   },
   props: {
      work: {
-      type: Array,
-    
+      type: Object || null,
+      default: null,
     },
 
     formIsShown: {
@@ -93,25 +94,35 @@ export default {
   data() {
     return {
       hovered: false,
+      preview: "",
       newWork: {
         title: "",
         link: "",
         description: "",
         techs: "",
-        photo: {},
-        preview: ""
-      }
+        photo: {}
+      } 
     }
   },
   methods: {
      ...mapActions({
       addNewWork: "works/add",
       fetchWorkAction: "works/fetch",
+      editWorkAction: "works/edit",
     }),
 
     
     async handleSubmit() {
-      await this.addNewWork(this.newWork);
+      if ((await this.$validate()) === true) {
+        if (this.newWork.id) {
+          await this.editWork(this.newWork);
+        } else {
+          await this.addNewWork(this.newWork);
+        }
+      
+        //this.$emit("submit");
+      }
+      //await this.addNewWork(this.newWork);
         //this.text = ""
     //   this.link = "",
     //   this.description = "",
@@ -159,7 +170,8 @@ export default {
              type: "error"
            })
       }
-    }
+    },
+
    
     // cancelForm() {
     //   this.title = "",

@@ -49,7 +49,7 @@ script(type="text/x-template")#preview-btns
     ).square-btns__item.square-btns__item_prev.disabled-btn
 
 script(type="text/x-template")#preview-info
-  .works-preview__info
+  .works-preview__info(:key="currentWork.id")
     .works-preview__tags
       tags(
         :tags="tagsArray"
@@ -57,7 +57,7 @@ script(type="text/x-template")#preview-info
 
     .works-preview__title {{currentWork.title}}
     .works-preview__desc
-      p {{currentWork.desc}}
+      p {{currentWork.description}}
     a(:href="currentWork.link" target="_blank").iconed-link View site  
 
 script(type="text/x-template")#preview-tags

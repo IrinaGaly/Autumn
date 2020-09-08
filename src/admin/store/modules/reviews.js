@@ -20,6 +20,9 @@ export default {
         if (review.id === editReview.review.id) {
           review.review = editReview.review;
         }
+        else {
+          return review
+        }
       });
     },
   },

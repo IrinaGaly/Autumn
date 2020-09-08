@@ -24,7 +24,7 @@
               </div>
             </div>
             <div class="add-info-btns">
-              <appButton plain @click="$emit('edit')" title="Отмена"/>
+              <appButton plain @click="$emit('close')" title="Отмена"/>
               <appButton typeAttr="submit" title="СОХРАНИТЬ"/>
             </div>
           </div>
@@ -55,7 +55,8 @@ export default {
   },
   props: {
     review: {
-      type: Object
+      type: Object || null,
+      default: null,
     },
     shownForm: {
       type: Boolean,
@@ -76,14 +77,20 @@ export default {
   methods: {
      ...mapActions({
       addNewReview: "reviews/add",
+      editReview: "review/edit",
     }),
 
     
+    // async handleSubmit() {
+    //   await this.addNewReview(this.newReview);
+    //   this.$emit("submit"); 
+    // }, 
     async handleSubmit() {
-      await this.addNewReview(this.newReview);
-      this.$emit("submit"); 
-    }, 
-    
+        await this.addNewReview(this.newReview);
+        this.$emit("submit");
+      }
+    },
+
      handleChange(event) {
       event.preventDefault();
 
@@ -120,7 +127,7 @@ export default {
       }
     }
   }
-}
+
 </script>
 
 <style lang="postcss" src="./review-form.pcss" scoped>

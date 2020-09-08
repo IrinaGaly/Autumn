@@ -17,9 +17,12 @@ export default {
       });
     },
     EDIT_WORKS(state, editWork) {
-      state.data.forEach((work) => {
+      state.data.map((work) => {
         if (work.id === editWork.work.id) {
           work.work = editWork.work.work;
+        }
+        else {
+          return work
         }
       });
     },

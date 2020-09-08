@@ -3,9 +3,22 @@ export default {
   state: {
     data: [],
   },
+
   mutations: {
     SET_CATEGORIES: (state, categories) => (state.data = categories),
-    ADD_CATEGORY: (state, category) => state.data.unshift(category),
+    ADD_CATEGORY: (state, category) => 
+    { category.skills = [],
+      state.data.unshift(category)
+    },
+    ADD_SKILL: (state, newSkill) => {
+      // перебираем массив с категориями и формировать новый массив и в него складывать скиллы
+      state.data = state.data.map(category => {
+        if (category.id === newSkill.category) {
+          category.skills.push(newSkill);
+        }
+        return category;
+      })
+    },
     DELETE_CATEGORY: (state, categoryToRemove) => {
       state.data = state.data.filter((category) => {
         return category.id !== categoryToRemove;
@@ -19,21 +32,14 @@ export default {
     //   }
     // });
   },
-    EDIT_CATEGORY(state, editCategory) {state.data.forEach((category) => {
+    EDIT_CATEGORY(state, editCategory) 
+    {state.data.forEach((category) => {
       if(category.id === editCategory.category.id) {
         category.category = editCategory.category.category;
       }
     });
   },
-    ADD_SKILL: (state, newSkill) => {
-      // перебираем массив с категориями и формировать новый массив и в него складывать скиллы
-      state.data = state.data.map(category => {
-        if (category.id === newSkill.category) {
-          category.skills.push(newSkill);
-        }
-        return category;
-      })
-    },
+   
     REMOVE_SKILL: (state, skillToRemove) => {
       state.data = state.data.map(category => {
         if (category.id === skillToRemove.category) {

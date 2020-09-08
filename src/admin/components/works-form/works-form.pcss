@@ -29,6 +29,10 @@
   max-height: 280px;
   margin-right: 35px;
   background-size: cover;
+
+  @include phones {
+    margin: 0 0 15px 0;
+  }
 }
 .upload {
   background: #DEE4ED;  
@@ -43,6 +47,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @include phones {
+    padding: 10%;
+  }
 }
 .name-input {
   width: 100%;
@@ -79,11 +87,20 @@
 .work-text {
   width: 60%;
   margin-bottom: 39px;
+
+  @include phones {
+    width: 70%;
+    text-align: center;
+  }
 }
 
 .form-content {
   display: flex;
   flex-direction: row;
+
+  @include phones {
+    flex-direction: column;
+  }
 }
 .edit-work {
   color: #414C63;
@@ -91,5 +108,12 @@
   font-weight: bold;
   font-size: 18px;
   line-height: 25px;
+}
+ 
+.text {
+  margin-bottom: 0px;
+  color: #414C63;
+  font-weight: bold;
+font-size: 16px;
 }
 

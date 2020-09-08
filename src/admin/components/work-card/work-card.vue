@@ -47,7 +47,9 @@ export default {
     },
     editHandler() {
       this.$emit("edit-work", this.work);
+      //передаю союытие на изменение именно этой работы,на которую нажала
       console.log("ok");
+      //клик работает
     }
   },
   computed: {

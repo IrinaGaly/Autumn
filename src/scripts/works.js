@@ -14,7 +14,17 @@ const btns = {
 };
 
 const display = {
-  props: ["currentWork", "works", "currentIndex"],
+  // props: ["currentWork", 
+  // "works",
+  //  "currentIndex"],
+  props: {
+    currentWork: {
+      type: Object,
+      default: () => ({}),
+    },
+    works: Array,
+    currentIndex: Number,
+  },
   template: "#preview-display",
   components: {thumbs, btns},
    computed: {
@@ -30,17 +40,24 @@ const tags = {
   template: "#preview-tags",
 };
 
-const info = {
-  props: ["currentWork"],
-  template: "#preview-info",
-  components: {tags},
-  computed: {
-    tagsArray() {
-      //return this.currentWork.skills.split(",");
-        return this.currentWork.techs.split(",");
-      
-    }
-  }
+  const info = {
+    //props: ["currentWork"], расширить пропс для работ, часть инфо
+    // линк, тайтл, описание и теги 
+    props: {
+      currentWork: { type: Object, default: () => ({}), }, 
+    },
+    
+    template: "#preview-info",
+    components: { tags },
+    computed: {
+      tagsArray() {
+        //return this.currentWork.skills.split(",");
+        if (Object.keys(this.currentWork).length) {
+          return this.currentWork.techs.split(",");
+        }             //с сервера techs = skills
+      },
+    },
+  
 };
 
 new Vue({
@@ -53,6 +70,7 @@ new Vue({
       currentIndex: 0,
     };
   },
+  
   computed: {
     // вычисляем новое значение при нажатии на кнопку 
     currentWork() {

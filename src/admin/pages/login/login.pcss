@@ -39,6 +39,11 @@
   flex-direction: column;
   justify-content: space-around;
   padding: 47px 75px 72px;
+
+  @include phones {
+    width: 465px;
+    height: 420px;
+  }
 }
 
 .form-title {
@@ -56,6 +61,11 @@
 .row {
   margin-bottom: 27px;
   min-width: 410px;
+
+  @include phones {
+    width: 310px;
+  }
+
 }
 
 .form-content {
