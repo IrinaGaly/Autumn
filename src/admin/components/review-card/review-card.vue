@@ -1,5 +1,5 @@
 <template>
-  <div class="review-card">
+  <div class="review-card" :review="review">
     <div class="preview">
       <img :src="correctReview" class="picture">
       <div class="preview-content">
@@ -31,10 +31,16 @@ export default {
     methods: {
     handleRemove() {
       this.$emit("remove-review");
+      //this.$emit('reset');
     },
-     handleEdit() {
+    handleEdit() {
       this.$emit("edit-review", this.review);
+      //передаю союытие на изменение именно этой работы,на которую нажала
+      console.log(this.review);
     }
+    //  handleEdit() {
+    //   this.$emit("edit-review", this.review);
+    // }
   },
 
   computed: {

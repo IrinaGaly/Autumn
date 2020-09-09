@@ -13,7 +13,7 @@
         </ul>
       </div>
     </div>
-    <div class="card-work-desc">
+    <div class="card-work-desc" :work="work">
       <div class="card-work-desc-content">
         <h4 class="card-work-title">{{work.title}}</h4>
         <p class="card-work-text">{{work.description}}</p>
@@ -37,10 +37,22 @@ export default {
     tag,
   },
   props: {
-    work: {
-      type: Object,
-    },
+     work: {
+       type: Object,
+     },
   },
+  // data() {
+  //   return {
+  //     preview: "",
+  //     work: {
+  //       title: "",
+  //       link: "",
+  //       description: "",
+  //       techs: "",
+  //       photo: {}
+  //     } 
+  //   }
+  // },
   methods: {
     onRemove() {
       this.$emit("remove-work");
@@ -48,7 +60,7 @@ export default {
     editHandler() {
       this.$emit("edit-work", this.work);
       //передаю союытие на изменение именно этой работы,на которую нажала
-      console.log("ok");
+      console.log(this.work);
       //клик работает
     }
   },

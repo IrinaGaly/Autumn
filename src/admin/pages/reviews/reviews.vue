@@ -6,21 +6,25 @@
           <h1 class="section-name">Блок «Отзывы»</h1>
         </div>
         <reviewForm :review="review"
-        v-if="formIsShown === false"
+        v-if="formIsShown === true"
+        @reset="resetHandler = false" 
         @submit="submitForm"
-        @close="formIsShown = true"
+        @edit-review="editReview"
+        @closeForm="closeForm"
         />
         <ul class="reviews-list">
           <li class="review-item">
             <square-btn 
             type="square"
             title="Добавить отзыв" 
-            @click="formIsShown = false"/>
+            @click="formIsShown = true"/>
           </li>
           <li class="review-item" v-for="review in reviews" :key="review.id" >
             <reviewCard :review="review"
-             @edit-review="editReview(review)"
+             
              @remove-review="removeReview(review.id)"
+             @reset="resetReview(review.id)"
+             @edit-review="editReview($event, review.id)"
              />
           </li>
         </ul>
@@ -51,8 +55,8 @@ export default {
 
   data() {
     return {
-      formIsShown: true,
-      review: null,
+      formIsShown: false,
+      review: {}
     }
   },
   computed: {
@@ -67,25 +71,31 @@ export default {
     editReviewAction: "reviews/edit"
   }),
 
+  closeForm() {
+       this.formIsShown = false
+     },
+
   async removeReview(reviewToRemove) {
     await this.removeReviewAction(reviewToRemove);
   },
-
-  watch: {
-  formIsShown() {
-    if (!this.formIsShown) {
-      this.review = null;
-      }
+      async editReview(reviewAuthor, reviewOcc, reviewCorrect, reviewText,  reviewId) {
+        await this.editReviewAction({
+         author: reviewTitle,
+         id: reviewId,
+         occ: reviewOcc,
+         text: reviewText,
+         correctReview: reviewCorrect
+       })
       },
+
+   submitForm() {
+      this.review = ""
+    },
+    editReview(reviewToEdit) {
+      this.formIsShown = true;
+      this.review = reviewToEdit
     },
   },
-      
-  editReview(review) {
-    this.formIsShown = true;
-    this.review = review;
-  },
-
-
      created() {
       this.fetchReviewAction();
     },
@@ -102,7 +112,7 @@ export default {
   //  created() {
   //    this.reviews = require('../../../data/reviews.json');
   //    //this.categories = require("../../data/categories.json");
-  //  }
+    
 }
 </script>
 

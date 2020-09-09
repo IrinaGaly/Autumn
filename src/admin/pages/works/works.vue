@@ -10,20 +10,20 @@
          v-if="formIsShown === true"
          @reset="resetHandler = false" 
          :work="work"
-         @submit="submitForm"/> 
+         @submit="submitForm"
+         @edit-work="editWork"
+         @closeForm="closeForm" /> 
         </div>
         <ul class="works">
           <li class="work-item">
             <square-btn 
             type="square"
             title="Добавить работу" 
-            @closeForm="formIsShown"
             @click="formIsShown = true"
           /></li>
           <li class="work-item" v-for="work in works" :key="work.id"
            >
-            <workCard :work="work"
-            @edit-work="editWork"
+            <workCard :work="work" @edit-work="editWork"
             @remove-work="removeWork(work.id)"/>
           </li>
         </ul>
@@ -51,7 +51,7 @@ export default {
   data() {
      return {  
       formIsShown: false,
-       work: null
+       work: {}
     } 
   },
 
@@ -61,13 +61,13 @@ export default {
     })
   },
 
-   watch: {
-    formIsShown() {
-      if (!this.formIsShown) {
-        this.work = null;
-      }
-    },
-  },
+  //  watch: {
+  //   formIsShown() {
+  //     if (!this.formIsShown) {
+  //       this.work = null;
+  //     }
+  //   },
+  // },
 
   methods: {
       ...mapActions({
@@ -76,19 +76,27 @@ export default {
         editWorkAction: "works/edit"
       }),
 
-     
+     closeForm() {
+       this.formIsShown = false
+     },
 
     async removeWork(workToRemove) {
       await this.removeWorkAction(workToRemove);
     },
 
-    editWork(editWork) {
-      this.formIsShown = true;
-      this.work = work;
+    // editWork(editWork) {
+    //   this.formIsShown = true;
+    //   this.work = work;
        
+    // }
+    submitForm() {
+      this.work = ""
+    },
+    editWork(workToEdit) {
+      this.formIsShown = true;
+      this.work = workToEdit
     }
     },
-
     created() {
       this.fetchWorkAction();
       //this.categories = require("../../data/categories.json");

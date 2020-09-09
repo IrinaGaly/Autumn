@@ -19,11 +19,18 @@
               </div>
             </div>
           </label>
+          <div class="error-message"
+              :class="{error: validation.hasError('preview')}">
+              {{validation.firstError('preview')}}</div>
           <div class="info">
-            <app-input v-model="newWork.title" class="name-input" title="Название" />
-            <app-input v-model="newWork.link" class="link-input" title="Ссылка" />
-            <app-input  v-model="newWork.description" title="Описание" fieldType="textarea" />
-            <tags-adder v-model="newWork.techs" class="tag-adder" />
+            <app-input v-model="newWork.title" class="name-input" title="Название" 
+            :errorMessage="validation.firstError('newWork.title')"/>
+            <app-input v-model="newWork.link" class="link-input" title="Ссылка" 
+            :errorMessage="validation.firstError('newWork.link')"/>
+            <app-input  v-model="newWork.description" title="Описание" fieldType="textarea" 
+            :errorMessage="validation.firstError('newWork.description')"/>
+            <tags-adder v-model="newWork.techs" class="tag-adder" 
+            :errorMessage="validation.firstError('newWork.techs')"/>
             <div class="add-info-btns">
               <appButton plain @click="$emit('closeForm')" title="Отмена"/>
               <appButton typeAttr="submit" title="СОХРАНИТЬ"/>
@@ -64,7 +71,7 @@ export default {
       return Validator.value(value).required("Обязательно");
     },
     "newWork.preview"(value) {
-      return Validator.value(value).required("Обязательно");
+      return Validator.value(value).required("Обязательно для заполнения");
     },
   },
   components: {
@@ -77,8 +84,7 @@ export default {
   },
   props: {
      work: {
-      type: Object || null,
-      default: null,
+      type: Object
     },
 
     formIsShown: {
@@ -110,18 +116,25 @@ export default {
       fetchWorkAction: "works/fetch",
       editWorkAction: "works/edit",
     }),
-
-    
     async handleSubmit() {
       if ((await this.$validate()) === true) {
-        if (this.newWork.id) {
-          await this.editWork(this.newWork);
-        } else {
+         if (this.newWork.id) {
+           await this.editWork(this.newWork);
+         } else
+          {
           await this.addNewWork(this.newWork);
+          this.newWork.preview = "",
+          this.newWork = ""
+          //this.newWork.link = "",
+          //this.newWork.techs = ""
         }
-      
-        //this.$emit("submit");
+        this.$emit("submit");
       }
+    },
+    
+    // editWork(workToEdit) {
+    //   console.log(workToEdit)
+    // },
       //await this.addNewWork(this.newWork);
         //this.text = ""
     //   this.link = "",
@@ -129,8 +142,7 @@ export default {
     //   this.techs = "",
     //   this.preview = "",
     //   this.photo = {}
-    }, 
-    
+   
     handleChange(event) {
       event.preventDefault();
 

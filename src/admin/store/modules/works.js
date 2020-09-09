@@ -53,6 +53,15 @@ export default {
         console.log("error");
       }
     },
+    async edit({ commit }, editWork) {
+      try {
+        const { data } = await this.$axios.post(`/works/${editWork.id}`, {title: editWork.title});
+        commit("EDIT_WORKS", data);
+      } catch (error) {
+        throw new Error("ошибка");
+      }
+      return true;
+    },
     async remove({ commit }, removeWork) {
       try {
         const { data } = await this.$axios.delete(`/works/${removeWork}`);

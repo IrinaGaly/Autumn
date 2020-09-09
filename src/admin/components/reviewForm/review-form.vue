@@ -8,7 +8,10 @@
               <div class="review-col">
                 <div class="photo">
                 </div>
-                <label >
+                <label :style="{backgroundImage: `url(${newReview.preview})`}"
+                  class="upload-container" :class="['upload', {active: newReview.preview}]" 
+                    @dragover="handleDragOver"
+                    @drop="handleChange">
                   <div class="work-input">
                     <div class="btn-wrap">
                       <appButton plain typeAttr="file" title="Добавить фотографию"
@@ -18,13 +21,16 @@
                 </label>
               </div>
               <div class="review-container">
-                <app-input v-model="newReview.author" class="name-input" title="Имя автора" />
-                <app-input v-model="newReview.occ" class="occ-input" title="Титул автора" />
-                <app-input v-model="newReview.text"  title="Отзыв" fieldType="textarea" />
+                <app-input v-model="newReview.author" class="name-input" title="Имя автора" 
+                :errorMessage="validation.firstError('newReview.author')"/>
+                <app-input v-model="newReview.occ" class="occ-input" title="Титул автора" 
+                 :errorMessage="validation.firstError('newReview.occ')"/>
+                <app-input v-model="newReview.text"  title="Отзыв" fieldType="textarea" 
+                :errorMessage="validation.firstError('newReview.text')"/>
               </div>
             </div>
             <div class="add-info-btns">
-              <appButton plain @click="$emit('close')" title="Отмена"/>
+              <appButton plain @click="$emit('closeForm')" title="Отмена"/>
               <appButton typeAttr="submit" title="СОХРАНИТЬ"/>
             </div>
           </div>
@@ -43,10 +49,25 @@ import card from "./../card/card";
 import button from "../button/button";
 
 //import appButton from "../../components/button";
-
+import { Validator } from "simple-vue-validator";
 import { mapActions, mapState } from "vuex";
 
 export default {
+  mixins: [require("simple-vue-validator").mixin],
+  validators: {
+    "newReview.author"(value) {
+      return Validator.value(value).required("Обязательно");
+    },
+    "newReview.occ"(value) {
+      return Validator.value(value).required("Обязательно");
+    },
+    "newReview.text"(value) {
+      return Validator.value(value).required("Обязательно");
+    },
+    "preview"(value) {
+      return Validator.value(value).required("Обязательно для загрузки");
+    },
+  },
   components: {
     card,
     appButton: button,
@@ -55,15 +76,22 @@ export default {
   },
   props: {
     review: {
-      type: Object || null,
-      default: null,
+      type: Object,
+      
     },
     shownForm: {
       type: Boolean,
     },
   },
+   created() {
+     if (this.newReview) {
+       this.newReview = { ...this.newReview };
+       this.preview = `https://webdev-api.loftschool.com/${this.review.photo}`;
+     }
+   },
    data() {
     return {
+      preview: "",
       newReview: {
         author: "",
         occ: "",
@@ -86,7 +114,14 @@ export default {
     //   this.$emit("submit"); 
     // }, 
     async handleSubmit() {
-        await this.addNewReview(this.newReview);
+      if ((await this.$validate()) === true) {
+        if (this.newReview.id) {
+          await this.editReview(this.newReview);
+        } else {
+          await this.addNewReview(this.newReview);
+          this.newReview.preview = "",
+          this.newReview = ""
+        }
         this.$emit("submit");
       }
     },
@@ -100,7 +135,10 @@ export default {
 
       this.newReview.photo = file;
       this.renderPhoto(file);
-      this.hovered = false;
+    },
+    handleDragOver(e) {
+      e.preventDefault();
+      
     },
 
     renderPhoto(file) {
@@ -127,6 +165,7 @@ export default {
       }
     }
   }
+}
 
 </script>
 

@@ -5,7 +5,8 @@
     <div class="title">
       <app-input 
       :errorMessage="validation.firstError('skill.title')"
-      v-model="skill.title" placeholder="Новый навык" />
+      v-model="skill.title" placeholder="Новый навык" 
+      />
     </div>
     <div class="percent">
       <app-input 
@@ -21,15 +22,15 @@
 <script>
 import input from "../input";
 import button from "../button";
-import { Validator, mixin as ValidatorMixin } from 'simple-vue-validator';
+import { Validator } from "simple-vue-validator";
 import axios from "axios";
 
 //const Validator = SimpleVueValidator.Validator;
 
 
 export default {
-  mixins: [ValidatorMixin],
-  validators: {
+  mixins: [require("simple-vue-validator").mixin],
+  validators:  {
     "skill.title": (value) => {
         return Validator.value(value).required("Не может быть путсым");
       },
