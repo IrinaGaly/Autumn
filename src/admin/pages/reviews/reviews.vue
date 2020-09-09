@@ -21,10 +21,8 @@
           </li>
           <li class="review-item" v-for="review in reviews" :key="review.id" >
             <reviewCard :review="review"
-             
              @remove-review="removeReview(review.id)"
-             @reset="resetReview(review.id)"
-             @edit-review="editReview($event, review.id)"
+             @edit-review="editReview"
              />
           </li>
         </ul>
@@ -56,7 +54,8 @@ export default {
   data() {
     return {
       formIsShown: false,
-      review: {}
+      review: {},
+      preview: {}
     }
   },
   computed: {
@@ -68,7 +67,7 @@ export default {
   ...mapActions({
     fetchReviewAction: "reviews/fetch",
     removeReviewAction: "reviews/remove",
-    editReviewAction: "reviews/edit"
+   //editReviewAction: "reviews/edit"
   }),
 
   closeForm() {
@@ -78,22 +77,22 @@ export default {
   async removeReview(reviewToRemove) {
     await this.removeReviewAction(reviewToRemove);
   },
-      async editReview(reviewAuthor, reviewOcc, reviewCorrect, reviewText,  reviewId) {
-        await this.editReviewAction({
-         author: reviewTitle,
-         id: reviewId,
-         occ: reviewOcc,
-         text: reviewText,
-         correctReview: reviewCorrect
-       })
-      },
+      // async editReview(reviewAuthor, reviewOcc, reviewCorrect, reviewText,  reviewId) {
+      //   await this.editReviewAction({
+      //    author: reviewTitle,
+      //    id: reviewId,
+      //    occ: reviewOcc,
+      //    text: reviewText,
+      //    correctReview: reviewCorrect
+      //  })
+      // },
 
    submitForm() {
       this.review = ""
     },
     editReview(reviewToEdit) {
       this.formIsShown = true;
-      this.review = reviewToEdit
+      this.review = reviewToEdit;
     },
   },
      created() {

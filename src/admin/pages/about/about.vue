@@ -70,7 +70,8 @@ export default {
       removeSkillAction: "skills/remove",
       editSkillAction: "skills/edit",
       removeCategoryAction: "categories/delete",
-      editCategoryAction: "categories/edit"
+      editCategoryAction: "categories/edit",
+      showTooltip: "tooltips/show",
     }),
    async createSkill(skill, categoryId) {
      const newSkill = {
@@ -80,15 +81,31 @@ export default {
      await this.addSkillAction(newSkill, newSkill.title);
      skill.title = "";
      skill.percent = "";
+
+
+      this.showTooltip({
+        text: `Навык ${newSkill.title} добавлен`,
+        type: "success",
+      });
     },
+
+    
 
     async removeSkill(skill) {
       await this.removeSkillAction(skill);
+      this.showTooltip({
+        text: `Запись удалена`,
+        type: "success",
+      });
     },
 
      async editSkill(skill) {
       await this.editSkillAction(skill);
       skill.editmode = false;
+      this.showTooltip({
+        text: `Запись успешно изменена`,
+        type: "success",
+      });
     },
 
     async createCategory(categoryTitle) {
@@ -96,7 +113,11 @@ export default {
         await this.createCategoryAction(categoryTitle);
         this.emptyCatIsShown = false;
       } catch (error) {
-        console.log(error.message); 
+        this.showTooltip({
+          text: error.message,
+          type: "error",
+        });
+        console.log(error.message);
       }
     },
      //async editCategory(category) {
@@ -109,6 +130,10 @@ export default {
      },
      async removeCategory(categoryId) {
       await this.removeCategoryAction(categoryId);
+      this.showTooltip({
+        text: `Запись удалена`,
+        type: "success",
+      });
     },
   },
 

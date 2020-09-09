@@ -6,9 +6,7 @@
           <div class="info">
             <div class="info-wrap">
               <div class="review-col">
-                <div class="photo">
-                </div>
-                <label :style="{backgroundImage: `url(${newReview.preview})`}"
+                <label :style="{backgroundImage: `url(${preview})`}"
                   class="upload-container" :class="['upload', {active: newReview.preview}]" 
                     @dragover="handleDragOver"
                     @drop="handleChange">
@@ -84,8 +82,8 @@ export default {
     },
   },
    created() {
-     if (this.newReview) {
-       this.newReview = { ...this.newReview };
+     if (this.review) {
+       this.newReview = { ...this.review };
        this.preview = `https://webdev-api.loftschool.com/${this.review.photo}`;
      }
    },
@@ -105,7 +103,7 @@ export default {
   methods: {
      ...mapActions({
       addNewReview: "reviews/add",
-      editReview: "review/edit",
+      editReview: "reviews/edit",
     }),
 
     
@@ -114,7 +112,7 @@ export default {
     //   this.$emit("submit"); 
     // }, 
     async handleSubmit() {
-      if ((await this.$validate()) === true) {
+      //if ((await this.$validate()) === true) {
         if (this.newReview.id) {
           await this.editReview(this.newReview);
         } else {
@@ -123,7 +121,7 @@ export default {
           this.newReview = ""
         }
         this.$emit("submit");
-      }
+     // }
     },
 
      handleChange(event) {

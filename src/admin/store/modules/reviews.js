@@ -63,13 +63,13 @@ export default {
       return true;
     },
     async edit({ commit }, editReview) {
-      const editFormData = new FormData();
+      // const editFormData = new FormData();
 
-      Object.keys(editReview).forEach((item) => {
-        editFormData.append(item, editReview[item]);
-      });
+      // Object.keys(editReview).forEach((item) => {
+      //   editFormData.append(item, editReview[item]);
+      // });
       try {
-        const { data } = await this.$axios.post(`/reviews/${editReview.id}`, editFormData);
+        const { data } = await this.$axios.post(`/reviews/${editReview.id}`, {occ: editReview.occ, author: editReview.author, text: editReview.text, photo: editReview.photo});
         commit("EDIT_REVIEWS", data);
       } catch (error) {
         console.log("ОЩИБКА");

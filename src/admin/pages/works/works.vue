@@ -51,7 +51,8 @@ export default {
   data() {
      return {  
       formIsShown: false,
-       work: {}
+       work: {},
+       preview: {}
     } 
   },
 

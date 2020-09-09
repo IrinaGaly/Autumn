@@ -37,6 +37,7 @@ import appButton from "../../components/button";
 import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
 import $axios from "../../requests";
 import {mapActions} from "vuex";
+
 export default {
   mixins: [ValidatorMixin],
   validators: {

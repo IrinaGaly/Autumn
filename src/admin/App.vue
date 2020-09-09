@@ -1,11 +1,15 @@
 <template>
   <div class="app-container">
     <router-view name="header" />
-    <router-view />
+    <transition name="animate" mode="out-in" >
+      <router-view />
+    </transition>
     <div :class="['notify-container', {active: isTooltipIsshown}]">
       <div class="notification">
         <notification 
-          
+          :text="tooltipText"
+          :type="tooltipType"
+          @click="hideTooltip"
         />
       </div>
     </div>
@@ -23,7 +27,7 @@ import tagsAdder from "./components/tagsAdder"
 import workCard from "./components/work-card"
 import squareBtn from "./components/button"
 import notification from "./components/notification"
-import {mapState, mapActions} from "vuex";
+import { mapState, mapActions } from "vuex";
 
 
 export default {
@@ -44,10 +48,10 @@ export default {
     })
   },
   computed: {
-    ...mapState("tooltip", {
+    ...mapState("tooltips", {
       isTooltipIsshown: state => state.isShow,
       tooltipText: state => state.text,
-      tooltipText: state => state.type,
+      tooltipText: state => state.type
     })
   }
 }

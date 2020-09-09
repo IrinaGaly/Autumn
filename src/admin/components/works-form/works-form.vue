@@ -4,7 +4,7 @@
       <card  class="edit-work" title="Редактирование работы">
         <div slot="content" class="form-content">
           <label 
-          :style="{backgroundImage: `url(${newWork.preview})`}"
+          :style="{backgroundImage: `url(${preview})`}"
           class="upload-container" :class="['upload', {active: newWork.preview}, {
             hovered: hovered }]" 
             @dragover="handleDragOver"
@@ -117,10 +117,11 @@ export default {
       editWorkAction: "works/edit",
     }),
     async handleSubmit() {
-      if ((await this.$validate()) === true) {
+      //if ((await this.$validate()) === true) {
          if (this.newWork.id) {
-           await this.editWork(this.newWork);
-         } else
+           await this.editWorkAction(this.newWork);
+         } 
+         else
           {
           await this.addNewWork(this.newWork);
           this.newWork.preview = "",
@@ -129,7 +130,7 @@ export default {
           //this.newWork.techs = ""
         }
         this.$emit("submit");
-      }
+      //}
     },
     
     // editWork(workToEdit) {
